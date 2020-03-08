@@ -69,7 +69,7 @@ namespace WormGIS
             if (!DA.GetData("Path", ref path)) return;
 
             Vector3d vec = new Vector3d(0, 0, 0);
-            if (!DA.GetData("Vector", ref vec)) return;
+            DA.GetData("Vector", ref vec);
 
             // Open shapefile from path
             Shapefile shp = Shapefile.OpenFile(path);
@@ -87,13 +87,20 @@ namespace WormGIS
             foreach (Feature f in shp.Features)
             {
 
-                //Grasshopper.Kernel.Data.GH_Path path = new Grasshopper.Kernel.Data.GH_Path();
+                // Get keys for each feature
+                keysTree.Add(f.DataRow.ToString());
+     
+
+
+
+
+                // Get values for each feature
+
+
+                // Get pts for each feature
                 List<Point3d> pts = new List<Point3d>();
 
-
                 IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
-
-                // Get coords of each point
                 foreach (DotSpatial.Topology.Coordinate coord in coords)
                 {
                     Point3d pt = new Point3d(coord.X, coord.Y, 0);
