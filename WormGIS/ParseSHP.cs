@@ -34,7 +34,6 @@ namespace WormGIS
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Run", "R", "True to run component", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -54,25 +53,14 @@ namespace WormGIS
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            bool runIt = false;
             string path = "";
-            string Data = "";
-
-
             if (!DA.GetData("Path", ref path)) return;
-            if (!DA.GetData("Run", ref runIt)) return;
-
-
-            //Get file path fromm input
-            Data = path;
-            List<string> output = new List<string>();
 
             //Open shapefile from path
             Shapefile shp = Shapefile.OpenFile(path);
-            AttributeTable attributes = shp.Attributes;
-            var columns = attributes.Columns;
 
             List<Point3d> pts = new List<Point3d>();
+
 
             //Read features in the shapefile
             foreach (Feature f in shp.Features)
@@ -82,8 +70,6 @@ namespace WormGIS
                 {
                     double x;
                     double y;
-                    double z;
-
                     x = coord.X;
                     y = coord.Y;
 
@@ -96,9 +82,8 @@ namespace WormGIS
 
 
             //Output the data
-            DA.SetDataList("Value", output);
             DA.SetDataList("Points", pts);
-           
+
 
 
         }
