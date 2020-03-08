@@ -4,6 +4,9 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using DotSpatial.Data;
 using DotSpatial.Serialization;
+using Grasshopper;
+using Grasshopper.Kernel.Data;
+
 
 // In order to load the result of this wizard, you will also need to
 // add the output bin/ folder of this project to the list of loaded
@@ -43,7 +46,7 @@ namespace WormGIS
         {
             pManager.AddTextParameter("Key", "K ", "Keys of feature attributes", GH_ParamAccess.list);
             pManager.AddTextParameter("Value", "V ", "Values of feature attributes", GH_ParamAccess.list);
-            pManager.AddPointParameter("Points", "P", "feature geometry as point", GH_ParamAccess.list);
+            pManager.AddPointParameter("Points", "P", "feature geometry as point", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -56,33 +59,35 @@ namespace WormGIS
             string path = "";
             if (!DA.GetData("Path", ref path)) return;
 
-            //Open shapefile from path
+            // Open shapefile from path
             Shapefile shp = Shapefile.OpenFile(path);
 
-            List<Point3d> pts = new List<Point3d>();
-
-
+            int pathCount = 0;
+            
+            // Setup output
+            DataTree<Point3d> tree = new DataTree<Point3d>();
             //Read features in the shapefile
             foreach (Feature f in shp.Features)
             {
+
+                //Grasshopper.Kernel.Data.GH_Path path = new Grasshopper.Kernel.Data.GH_Path();
+                List<Point3d> pts = new List<Point3d>();
+
+
                 IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
                 foreach (DotSpatial.Topology.Coordinate coord in coords)
                 {
-                    double x;
-                    double y;
-                    x = coord.X;
-                    y = coord.Y;
-
-                    Point3d pt = new Point3d(x, y, 0);
+                    Point3d pt = new Point3d(coord.X, coord.Y, 0);
                     pts.Add(pt);
                 }
-
-
+                GH_Path p = new GH_Path(pathCount);
+                tree.AddRange(pts, p);
+                pathCount++;
             }
 
 
             //Output the data
-            DA.SetDataList("Points", pts);
+            DA.SetDataTree(2, tree);
 
 
 
