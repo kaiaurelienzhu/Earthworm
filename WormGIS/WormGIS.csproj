@@ -83,7 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParseSHP.cs" />
+    <Compile Include="ghc_ParseSHP.cs" />
     <Compile Include="WormGISInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

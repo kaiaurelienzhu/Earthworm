@@ -15,7 +15,7 @@ using Grasshopper.Kernel.Data;
 
 namespace WormGIS
 {
-    public class ParseSHP : GH_Component
+    public class ghc_ParseSHP : GH_Component
     {
         /// <summary>
         /// Each implementation of GH_Component must provide a public 
@@ -24,7 +24,7 @@ namespace WormGIS
         /// Subcategory the panel. If you use non-existing tab or panel names, 
         /// new tabs/panels will automatically be created.
         /// </summary>
-        public ParseSHP()
+        public ghc_ParseSHP()
           : base("ParseShapefile", "ParseSHP",
               "Parses a shapefile into the Grasshopper environment",
               "WormGIS", "Utilities")
@@ -37,6 +37,7 @@ namespace WormGIS
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
+            pManager.AddVectorParameter("Vector", "V", "Option translation vector", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -44,8 +45,8 @@ namespace WormGIS
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Key", "K ", "Keys of feature attributes", GH_ParamAccess.list);
-            pManager.AddTextParameter("Value", "V ", "Values of feature attributes", GH_ParamAccess.list);
+            pManager.AddTextParameter("Key", "K ", "Keys of feature attributes", GH_ParamAccess.tree);
+            pManager.AddTextParameter("Value", "V ", "Values of feature attributes", GH_ParamAccess.tree);
             pManager.AddPointParameter("Points", "P", "feature geometry as point", GH_ParamAccess.tree);
         }
 
@@ -59,14 +60,22 @@ namespace WormGIS
             string path = "";
             if (!DA.GetData("Path", ref path)) return;
 
+            Vector3d vec = new Vector3d(0, 0, 0);
+            if (!DA.GetData("Vector", ref path)) return;
+
             // Open shapefile from path
             Shapefile shp = Shapefile.OpenFile(path);
 
-            int pathCount = 0;
+            
             
             // Setup output
-            DataTree<Point3d> tree = new DataTree<Point3d>();
-            //Read features in the shapefile
+            DataTree<Point3d> ptTree = new DataTree<Point3d>();
+            DataTree<string> keysTree = new DataTree<string>();
+            DataTree<string> valsTree = new DataTree<string>();
+
+
+            //Read features in the shapefile 
+            int pathCount = 0;
             foreach (Feature f in shp.Features)
             {
 
@@ -75,19 +84,26 @@ namespace WormGIS
 
 
                 IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
+
+                // Get coords of each point
                 foreach (DotSpatial.Topology.Coordinate coord in coords)
                 {
                     Point3d pt = new Point3d(coord.X, coord.Y, 0);
                     pts.Add(pt);
                 }
+
+
+
                 GH_Path p = new GH_Path(pathCount);
-                tree.AddRange(pts, p);
+                ptTree.AddRange(pts, p);
                 pathCount++;
             }
 
 
             //Output the data
-            DA.SetDataTree(2, tree);
+            DA.SetDataTree(0, keysTree);
+            DA.SetDataTree(1, valsTree);
+            DA.SetDataTree(2, ptTree);
 
 
 
