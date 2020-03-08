@@ -1,0 +1,58 @@
+C:\Users\User\source\repos\WormGIS\bin\WormGIS.dll
+C:\Users\User\source\repos\WormGIS\bin\WormGIS.pdb
+C:\Users\User\source\repos\WormGIS\obj\Debug\WormGIS.csprojAssemblyReference.cache
+C:\Users\User\source\repos\WormGIS\obj\Debug\WormGIS.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\WormGIS\obj\Debug\WormGIS.dll
+C:\Users\User\source\repos\WormGIS\obj\Debug\WormGIS.pdb
+D:\WORK\Private Study\GIS\WormGIS\bin\WormGIS.dll
+D:\WORK\Private Study\GIS\WormGIS\bin\WormGIS.pdb
+D:\WORK\Private Study\GIS\WormGIS\obj\Debug\WormGIS.csprojAssemblyReference.cache
+D:\WORK\Private Study\GIS\WormGIS\obj\Debug\WormGIS.csproj.CoreCompileInputs.cache
+D:\WORK\Private Study\GIS\WormGIS\obj\Debug\WormGIS.dll
+D:\WORK\Private Study\GIS\WormGIS\obj\Debug\WormGIS.pdb
+D:\WORK\Private Study\Programming\WormGIS\bin\WormGIS.dll
+D:\WORK\Private Study\Programming\WormGIS\bin\WormGIS.pdb
+D:\WORK\Private Study\Programming\WormGIS\obj\Debug\WormGIS.csproj.CoreCompileInputs.cache
+D:\WORK\Private Study\Programming\WormGIS\obj\Debug\WormGIS.dll
+D:\WORK\Private Study\Programming\WormGIS\obj\Debug\WormGIS.pdb
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\WormGIS.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\WormGIS.pdb
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\obj\Debug\WormGIS.csproj.CoreCompileInputs.cache
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\obj\Debug\WormGIS.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\obj\Debug\WormGIS.pdb
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\WormGIS.dll.config
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Data.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Data.Forms.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Extensions.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Mono.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Projections.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Projections.Forms.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Serialization.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Symbology.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Topology.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Data.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Data.Forms.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Extensions.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Mono.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Projections.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Projections.Forms.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Serialization.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Symbology.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\DotSpatial.Topology.xml
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\zh-CN\DotSpatial.Data.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\cs\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\de\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\de-DE\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\el\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\it-IT\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\ja-JP\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\lt\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\nl\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\pt\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\pt-BR\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\ro\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\th\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\vi-VN\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\zh-CN\DotSpatial.Projections.Forms.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\bin\de-DE\DotSpatial.Symbology.resources.dll
+D:\WORK\Private Study\Grasshopper\WormGIS\WormGIS\obj\Debug\WormGIS.csproj.CopyComplete
