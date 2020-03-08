@@ -36,8 +36,14 @@ namespace WormGIS
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            
+            // Compulsory inputs
             pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
-            pManager.AddVectorParameter("Vector", "V", "Option translation vector", GH_ParamAccess.item);
+
+            // Optional inputs
+            Params.Input[
+            pManager.AddVectorParameter("Vector", "V", "Option translation vector", GH_ParamAccess.item)
+            ].Optional = true;
         }
 
         /// <summary>
@@ -45,9 +51,11 @@ namespace WormGIS
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            
             pManager.AddTextParameter("Key", "K ", "Keys of feature attributes", GH_ParamAccess.tree);
             pManager.AddTextParameter("Value", "V ", "Values of feature attributes", GH_ParamAccess.tree);
             pManager.AddPointParameter("Points", "P", "feature geometry as point", GH_ParamAccess.tree);
+
         }
 
         /// <summary>
@@ -61,7 +69,7 @@ namespace WormGIS
             if (!DA.GetData("Path", ref path)) return;
 
             Vector3d vec = new Vector3d(0, 0, 0);
-            if (!DA.GetData("Vector", ref path)) return;
+            if (!DA.GetData("Vector", ref vec)) return;
 
             // Open shapefile from path
             Shapefile shp = Shapefile.OpenFile(path);

@@ -97,4 +97,3 @@ D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.cspro
 D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.csproj.CopyComplete
 D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.dll
 D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.pdb
-D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.csprojAssemblyReference.cache
