@@ -116,7 +116,7 @@ namespace WormGIS
                 IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
                 foreach (DotSpatial.Topology.Coordinate coord in coords)
                 {
-                    Point3d pt = new Point3d(coord.X + vec.X, coord.Y + vec.Y, 0);
+                    Point3d pt = new Point3d(coord.X + vec.X, coord.Y + vec.Y, 0 + vec.Z);
                     pts.Add(pt);
                 }     
                 ptTree.AddRange(pts, p);
