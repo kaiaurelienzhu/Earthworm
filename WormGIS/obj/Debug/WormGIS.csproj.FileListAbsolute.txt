@@ -97,3 +97,43 @@ D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.cspro
 D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.csproj.CopyComplete
 D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.dll
 D:\WORK\Private Study\Grasshopper\WormGIS-master\WormGIS\obj\Debug\WormGIS.pdb
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\WormGIS.dll.config
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\WormGIS.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\WormGIS.pdb
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Data.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Data.Forms.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Extensions.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Mono.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Projections.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Projections.Forms.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Serialization.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Symbology.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Topology.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Data.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Data.Forms.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Extensions.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Mono.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Projections.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Projections.Forms.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Serialization.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Symbology.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\DotSpatial.Topology.xml
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\zh-CN\DotSpatial.Data.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\cs\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\de\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\de-DE\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\el\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\it-IT\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\ja-JP\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\lt\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\nl\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\pt\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\pt-BR\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\ro\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\th\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\vi-VN\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\zh-CN\DotSpatial.Projections.Forms.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\de-DE\DotSpatial.Symbology.resources.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.csproj.CopyComplete
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.dll
+C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.pdb

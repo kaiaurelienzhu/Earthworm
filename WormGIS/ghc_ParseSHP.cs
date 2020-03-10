@@ -6,6 +6,7 @@ using DotSpatial.Data;
 using DotSpatial.Serialization;
 using Grasshopper;
 using Grasshopper.Kernel.Data;
+using System.Data;
 
 
 // In order to load the result of this wizard, you will also need to
@@ -86,15 +87,33 @@ namespace WormGIS
             int pathCount = 0;
             foreach (Feature f in shp.Features)
             {
+                // Get values for each feature
+                GH_Path p = new GH_Path(pathCount);
+                DataRow dataRow = f.DataRow;
+                List<string> vals = new List<string>();
+                foreach (object item in dataRow.ItemArray)
+                {
+                    vals.Add(item.ToString());
+                }
+                valsTree.AddRange(vals, p);
+
+
 
                 // Get keys for each feature
-                keysTree.Add(f.DataRow.ToString());
-     
+                DataTable table = dataRow.Table;
+                DataColumnCollection columns = table.Columns;
+                DataColumn[] dca = new DataColumn[columns.Count];
+                List<string> keys = new List<string>();
+                foreach (DataColumn col in dca)
+                {
+                    keys.Add(col.ToString());
+                }
+
+                keysTree.AddRange(keys, p);
 
 
 
 
-                // Get values for each feature
 
 
                 // Get pts for each feature
@@ -109,7 +128,7 @@ namespace WormGIS
 
 
 
-                GH_Path p = new GH_Path(pathCount);
+                
                 ptTree.AddRange(pts, p);
                 pathCount++;
             }
