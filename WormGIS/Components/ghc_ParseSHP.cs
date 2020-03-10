@@ -55,7 +55,8 @@ namespace WormGIS
             
             pManager.AddTextParameter("Key", "K ", "Keys of feature attributes", GH_ParamAccess.tree);
             pManager.AddTextParameter("Value", "V ", "Values of feature attributes", GH_ParamAccess.tree);
-            pManager.AddPointParameter("Points", "P", "feature geometry as point", GH_ParamAccess.tree);
+            pManager.AddPointParameter("Points", "Pts", "feature geometry as point", GH_ParamAccess.tree);
+            pManager.AddTextParameter("Number", "Prj", "Projection of shapefile", GH_ParamAccess.item);
 
         }
 
@@ -79,7 +80,9 @@ namespace WormGIS
 
             // Open shapefile from path
             Shapefile shp = Shapefile.OpenFile(path);
-        
+            string prj = shp.Projection.ToString();
+
+
 
             //Read features in the shapefile 
             int pathCount = 0;
@@ -124,10 +127,15 @@ namespace WormGIS
                 // Increment path
                 pathCount++;
             }
+
+
+
+
             //Output the data
             DA.SetDataTree(0, keysTree);
             DA.SetDataTree(1, valsTree);
             DA.SetDataTree(2, ptTree);
+            DA.SetData(3, prj);
         }
 
         /// <summary>
