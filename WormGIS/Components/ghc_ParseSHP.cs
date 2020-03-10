@@ -43,7 +43,7 @@ namespace WormGIS
 
             // Optional inputs
             Params.Input[
-            pManager.AddVectorParameter("Vector", "V", "Option translation vector", GH_ParamAccess.item)
+            pManager.AddVectorParameter("Vector", "V", "Option translation vector to working origin", GH_ParamAccess.item)
             ].Optional = true;
         }
 

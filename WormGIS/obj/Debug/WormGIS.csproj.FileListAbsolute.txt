@@ -137,4 +137,3 @@ C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\de-DE\DotSpatial.Symbol
 C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.csproj.CopyComplete
 C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.dll
 C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.pdb
-C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\WormGIS.csprojAssemblyReference.cache

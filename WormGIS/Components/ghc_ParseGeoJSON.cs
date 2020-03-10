@@ -14,7 +14,7 @@ namespace WormGIS
         public ghc_ParseGeoJSON()
           : base("ParseGeoJSON", "ParseGJSON",
               "Description",
-              "Category", "Subcategory")
+              "WormGIS", "Utilities")
         {
         }
 
