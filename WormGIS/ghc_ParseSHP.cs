@@ -66,22 +66,20 @@ namespace WormGIS
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            // Setup inputs
             string path = "";
             if (!DA.GetData("Path", ref path)) return;
-
             Vector3d vec = new Vector3d(0, 0, 0);
             DA.GetData("Vector", ref vec);
 
-            // Open shapefile from path
-            Shapefile shp = Shapefile.OpenFile(path);
-
-            
-            
             // Setup output
             DataTree<Point3d> ptTree = new DataTree<Point3d>();
             DataTree<string> keysTree = new DataTree<string>();
             DataTree<string> valsTree = new DataTree<string>();
 
+            // Open shapefile from path
+            Shapefile shp = Shapefile.OpenFile(path);
+        
 
             //Read features in the shapefile 
             int pathCount = 0;
@@ -98,49 +96,38 @@ namespace WormGIS
                 valsTree.AddRange(vals, p);
 
 
-
                 // Get keys for each feature
                 DataTable table = dataRow.Table;
                 DataColumnCollection columns = table.Columns;
                 DataColumn[] dca = new DataColumn[columns.Count];
+                columns.CopyTo(dca, 0);
                 List<string> keys = new List<string>();
                 foreach (DataColumn col in dca)
                 {
-                    keys.Add(col.ToString());
-                }
 
+                    keys.Add(col.ColumnName.ToString());
+                }
                 keysTree.AddRange(keys, p);
 
 
-
-
-
-
-                // Get pts for each feature
+                // Get pts for each feature and transform by user input vector
                 List<Point3d> pts = new List<Point3d>();
 
                 IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
                 foreach (DotSpatial.Topology.Coordinate coord in coords)
                 {
-                    Point3d pt = new Point3d(coord.X, coord.Y, 0);
+                    Point3d pt = new Point3d(coord.X + vec.X, coord.Y + vec.Y, 0);
                     pts.Add(pt);
-                }
-
-
-
-                
+                }     
                 ptTree.AddRange(pts, p);
+
+                // Increment path
                 pathCount++;
             }
-
-
             //Output the data
             DA.SetDataTree(0, keysTree);
             DA.SetDataTree(1, valsTree);
             DA.SetDataTree(2, ptTree);
-
-
-
         }
 
         /// <summary>
