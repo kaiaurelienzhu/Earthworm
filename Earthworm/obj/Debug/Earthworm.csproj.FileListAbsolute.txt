@@ -79,3 +79,9 @@ C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\Earthworm.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\Earthworm.pdb
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.pdb
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\GMap.NET.Core.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\GMap.NET.WindowsPresentation.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\protobuf-net.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\protobuf-net.xml
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.mapBrowser.resources
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csproj.GenerateResource.cache
