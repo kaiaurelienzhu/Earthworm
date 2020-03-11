@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WormGIS
 {
-    class Projections
+    class Projection_helpers
     {
         // This method converts latitude longitude to UTM xyz pts
         public static void LatLongDSPToUTM(double latitude, double longitude, string utmStr, out double X, out double Y)

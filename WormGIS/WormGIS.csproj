@@ -87,7 +87,8 @@
     <Compile Include="Components\ghc_ParseGeoJSON.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
     <Compile Include="Components\ghc_XYZ.cs" />
-    <Compile Include="Projections.cs" />
+    <Compile Include="Projection_helpers.cs" />
+    <Compile Include="UI_helpers.cs" />
     <Compile Include="WormGISInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

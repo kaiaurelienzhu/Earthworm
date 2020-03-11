@@ -54,7 +54,7 @@ namespace WormGIS.Components
             double lat;
             double lon;
 
-            Projections.UTMToLatLongDSP(pt.X, pt.Y, prj, out lat, out lon);
+            Projection_helpers.UTMToLatLongDSP(pt.X, pt.Y, prj, out lat, out lon);
 
             DA.SetData(0, lat);
             DA.SetData(1, lon);
