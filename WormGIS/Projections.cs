@@ -24,11 +24,10 @@ namespace WormGIS
 
             ProjectionInfo projIn = KnownCoordinateSystems.Geographic.World.WGS1984;
             ProjectionInfo projOut = ProjectionInfo.FromProj4String(utmStr);
+
             Reproject.ReprojectPoints(latlong, Z, projIn, projOut, 0, 1);
-
-
-            X = latlong[0];
-            Y = latlong[1];
+            Y = latlong[0];
+            X = latlong[1];
         }
 
         // This method converts XYZ UTM pts to latitude longitude
