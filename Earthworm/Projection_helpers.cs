@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WormGIS
+namespace Earthworm
 {
     class Projection_helpers
     {

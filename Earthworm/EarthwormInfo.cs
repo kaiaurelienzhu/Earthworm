@@ -2,15 +2,15 @@
 using System.Drawing;
 using Grasshopper.Kernel;
 
-namespace WormGIS
+namespace Earthworm
 {
-    public class WormGISInfo : GH_AssemblyInfo
+    public class EarthwormInfo : GH_AssemblyInfo
     {
         public override string Name
         {
             get
             {
-                return "WormGIS";
+                return "Earthworm";
             }
         }
         public override Bitmap Icon

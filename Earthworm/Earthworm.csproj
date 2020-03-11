@@ -8,8 +8,8 @@
     <ProjectGuid>{2CB70879-CBB8-411B-B80E-EA4FC39A625D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WormGIS</RootNamespace>
-    <AssemblyName>WormGIS</AssemblyName>
+    <RootNamespace>Earthworm</RootNamespace>
+    <AssemblyName>Earthworm</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -89,7 +89,7 @@
     <Compile Include="Components\ghc_XYZ.cs" />
     <Compile Include="Projection_helpers.cs" />
     <Compile Include="UI_helpers.cs" />
-    <Compile Include="WormGISInfo.cs" />
+    <Compile Include="EarthwormInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ using System.Data;
 // folder in Grasshopper.
 // You can use the _GrasshopperDeveloperSettings Rhino command for that.
 
-namespace WormGIS
+namespace Earthworm.Components
 {
     public class ghc_ParseSHP : GH_Component
     {
@@ -28,7 +28,7 @@ namespace WormGIS
         public ghc_ParseSHP()
           : base("ParseShapefile", "ParseSHP",
               "Parses a shapefile into the Grasshopper environment",
-              "WormGIS", "Utilities")
+              "Earthworm", "Utilities")
         {
         }
 

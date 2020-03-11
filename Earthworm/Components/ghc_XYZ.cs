@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace WormGIS.Components
+namespace Earthworm.Components
 {
     public class ghc_XYZ : GH_Component
     {
@@ -14,7 +14,7 @@ namespace WormGIS.Components
         public ghc_XYZ()
           : base("Latitude Longitude to XYZ", "ToXYZ",
               "Converts latitude longitude coordinates to XYZ",
-              "WormGIS", "Utilities")
+              "Earthworm", "Utilities")
         {
         }
 
