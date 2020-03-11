@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\ghc_LatLong.cs" />
     <Compile Include="Components\ghc_ParseGeoJSON.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
     <Compile Include="UTMtoLatLong.cs" />
