@@ -6,14 +6,14 @@ using Rhino.Geometry;
 
 namespace WormGIS.Components
 {
-    public class ghc_LatLong : GH_Component
+    public class ghc_XYZ : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the ghc_LatLong class.
+        /// Initializes a new instance of the ghc_XYZ class.
         /// </summary>
-        public ghc_LatLong()
-          : base("XYZ to Latitude Longitude", "ToLatLong",
-              "Converts xyz to lat long",
+        public ghc_XYZ()
+          : base("Latitude Longitude to XYZ", "ToXYZ",
+              "Converts latitude longitude coordinates to XYZ",
               "WormGIS", "Utilities")
         {
         }
@@ -23,7 +23,8 @@ namespace WormGIS.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddPointParameter("Point", "P", "Points to convert to lat long", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Latitude", "Lat", "Latitude to convert", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Longitude", "Long", "Longitude to convert", GH_ParamAccess.item);
             pManager.AddTextParameter("Projection", "PrjStr", "Projection of shapefile", GH_ParamAccess.item);
         }
 
@@ -32,9 +33,8 @@ namespace WormGIS.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddNumberParameter("Latitude", "Lat", "Converted latitude value", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Longitude", "Long", "Converted longitude value", GH_ParamAccess.item);
-
+            pManager.AddNumberParameter("X", "X", "Converted X value", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Y", "Y", "Converted Y value", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -43,21 +43,23 @@ namespace WormGIS.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-
             // Setup inputs
-            Point3d pt = new Point3d();
-            if (!DA.GetData("Point", ref pt)) return;
+            double lat = 0;
+            if (!DA.GetData("Latitude", ref lat)) return;
+
+            double lon = 0;
+            if (!DA.GetData("Longitude", ref lon)) return;
 
             string prj = "";
             if (!DA.GetData("Projection", ref prj)) return;
 
-            double lat;
-            double lon;
+            double X;
+            double Y;
 
-            Projections.UTMToLatLongDSP(pt.X, pt.Y, prj, out lat, out lon);
+            Projections.LatLongDSPToUTM(lat, lon, prj, out X, out Y);
 
-            DA.SetData(0, lat);
-            DA.SetData(1, lon);
+            DA.SetData(0, X);
+            DA.SetData(1, Y);
         }
 
         /// <summary>
@@ -78,7 +80,7 @@ namespace WormGIS.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("8d5f5cbc-992e-4282-9ac0-28e823c3a509"); }
+            get { return new Guid("afebe372-6236-4922-b7d8-dac021e920a1"); }
         }
     }
 }

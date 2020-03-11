@@ -86,8 +86,8 @@
     <Compile Include="Components\ghc_LatLong.cs" />
     <Compile Include="Components\ghc_ParseGeoJSON.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
-    <Compile Include="UTMtoLatLong.cs" />
-    <Compile Include="toXYZ.cs" />
+    <Compile Include="Components\ghc_XYZ.cs" />
+    <Compile Include="Projections.cs" />
     <Compile Include="WormGISInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
