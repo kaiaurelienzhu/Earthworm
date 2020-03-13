@@ -56,7 +56,7 @@ namespace Earthworm.Components
             double X;
             double Y;
 
-            Projection_helpers.LatLongDSPToUTM(lat, lon, prj, out X, out Y);
+            helpers_Projection.LatLongDSPToUTM(lat, lon, prj, out X, out Y);
 
             DA.SetData(0, X);
             DA.SetData(1, Y);
