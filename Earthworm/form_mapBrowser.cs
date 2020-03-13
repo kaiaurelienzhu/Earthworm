@@ -26,19 +26,12 @@ namespace Earthworm
         private void gMapControl1_Load(object sender, EventArgs e)
         {
             //Initialize map
-            gmap.MapProvider = GMapProviders.OpenStreetMap;
+            gmap.MapProvider = GMapProviders.GoogleHybridMap;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gmap.Position = new PointLatLng(0, 0);
             gmap.MinZoom = 1;
             gmap.MaxZoom = 24;
             gmap.Zoom = 1;
-
-            GMapOverlay markersOverlay = new GMapOverlay("markers");
-            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(0, 0), GMarkerGoogleType.red);
-            markersOverlay.Markers.Add(marker);
-            marker.ToolTipText = "I am here";
-            gmap.Overlays.Add(markersOverlay);
-
 
 
         }
