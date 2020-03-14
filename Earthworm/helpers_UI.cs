@@ -28,17 +28,24 @@ namespace Earthworm
         private double _minLng;
         private double _maxLat;
         private double _maxLng;
+        private double _minCropLat;
+        private double _minCropLng;
+        private double _maxCropLat;
+        private double _maxCropLng;
         private double _centreLat;
         private double _centreLng;
 
-        public CropProperties(double minLat, double minLng, double maxLat, double maxLng, double centreLat, double centreLng)
+
+        public CropProperties(double minLat, double minLng, double maxLat, double maxLng, double minCropLat, double minCropLng, double maxCropLat, double maxCropLng)
         {
             _minLat = minLat;
             _minLng = minLng;
             _maxLat = maxLat;
             _maxLng = maxLng;
-            _centreLat = centreLat;
-            _centreLng = centreLng;
+            _minCropLat = minCropLat;
+            _minCropLng = minCropLng;
+            _maxCropLat = maxCropLat;
+            _maxCropLng = maxCropLng;
         }
 
 
@@ -94,32 +101,57 @@ namespace Earthworm
             }
         }
 
-        public double centreLat
+        public double minCropLat
         {
             get
             {
-                return _centreLat;
+                return _minCropLat;
             }
 
             set
             {
-                _centreLat = value;
+                _minCropLat = value;
             }
         }
 
-        public double centreLng
+        public double minCropLng
         {
             get
             {
-                return _centreLng;
+                return _minCropLng;
             }
 
             set
             {
-                _centreLng = value;
+                _minCropLng = value;
             }
         }
 
+        public double maxCropLat
+        {
+            get
+            {
+                return _maxCropLat;
+            }
+
+            set
+            {
+                _maxCropLat = value;
+            }
+        }
+
+        public double maxCropLng
+        {
+            get
+            {
+                return _maxCropLng;
+            }
+
+            set
+            {
+                _maxCropLng = value;
+            }
+        }
     }
 
 

@@ -38,12 +38,12 @@ namespace Earthworm
             foreach (CropProperties property in _properties)
             {
 
+
                 gmap.Position = new PointLatLng(property.maxLat, property.maxLng);
                 gmap.MinZoom = 1;
                 gmap.MaxZoom = 24;
-                gmap.Zoom = 5;
+                gmap.Zoom = 10;
                 gmap.ShowCenter = false;
-
 
 
                 // Initialize shapefile boundaries
@@ -58,12 +58,33 @@ namespace Earthworm
 
                 // Creates polygons
                 GMapPolygon polygon = new GMapPolygon(points, "Extents");
-                polygon.Fill = new SolidBrush(Color.FromArgb(25, Color.Green));
-                polygon.Stroke = new Pen(Color.Red, 1);
+                polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Orange));
+                polygon.Stroke = new Pen(Color.Orange, 1);
                 polygons.Polygons.Add(polygon);
-                gmap.Overlays.Add(polygons);
+
 
             }
+
+
+            // WIP CREATE CROP POLYGON WITH DYNAMIC INPUT
+            CropProperties firstCrop = _properties[0];
+            List<PointLatLng> cropPts = new List<PointLatLng>();
+            //cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.minCropLng));
+            //cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.minCropLng));
+            //cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.maxCropLng));
+            //cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.maxCropLng));
+            cropPts.Add(new PointLatLng(0, 0));
+            cropPts.Add(new PointLatLng(1, 0));
+            cropPts.Add(new PointLatLng(1, 1));
+            cropPts.Add(new PointLatLng(0, 1));
+
+
+            // AWDD POLYGON TO MAP
+            GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
+            crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
+            crop.Stroke = new Pen(Color.Red, 2);
+            polygons.Polygons.Add(crop);
+            gmap.Overlays.Add(polygons);
 
 
         }
