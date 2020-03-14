@@ -16,7 +16,6 @@ namespace Earthworm
             Grasshopper.GUI.GH_WindowsFormUtil.CenterFormOnCursor(form, true);
             //form.ShowDialog();
             form.Show();
-
         }
     }
 }

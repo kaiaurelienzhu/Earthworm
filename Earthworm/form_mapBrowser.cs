@@ -48,5 +48,31 @@ namespace Earthworm
 
 
         }
+
+        private void gmap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
+        {
+            Console.WriteLine(String.Format("Polygon {0} with tag {1} was clicked",
+                item.Name, item.Tag));
+        }
+
+        private void gmap_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("This is just a test");
+        }
+
+        private void gmap_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("This is just a test");
+        }
+
+        private void gmap_OnPolygonEnter(GMapPolygon item, MouseEventArgs e)
+        {
+            Console.WriteLine("This is just a test");
+        }
+
+        private void form_mapBrowser_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
