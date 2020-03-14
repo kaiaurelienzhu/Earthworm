@@ -30,7 +30,7 @@ namespace Earthworm.Components
             
             // Compulsory inputs
             Params.Input[
-            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item)
+            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.list)
             ].Optional = true;
 
         }
@@ -53,32 +53,43 @@ namespace Earthworm.Components
             if (!DA.GetData("Run", ref runIt)) return;
 
             if (runIt)
+
             {
 
                 // Setup inputs
-                string path = "";
-                if (!DA.GetData("Path", ref path)) return;
+                List<string> paths = new List<string>();
+                if (!DA.GetDataList(1, paths)) return;
+
+                List<CropProperties> properties = new List<CropProperties>();
+                foreach (string path in paths)
+                {
+                    // Open shapefile from path
+                    Shapefile shp = Shapefile.OpenFile(path);
+                    string prjStr = shp.ProjectionString;
+                    string prj = shp.Projection.ToString();
+
+                    // Find extents & centre of shapefile
+                    double minLng = shp.Extent.MinX;
+                    double minLat = shp.Extent.MinY;
+
+                    double maxLng = shp.Extent.MaxX;
+                    double maxLat = shp.Extent.MaxY;
+
+                    double centreLng = shp.Extent.Center.X;
+                    double centreLat = shp.Extent.Center.Y;
+
+                    helpers_Projection.UTMToLatLongDSP(shp.Extent.Center.X, shp.Extent.Center.Y, prjStr, out centreLng, out centreLat);
+
+                    // Convert XY vals to Lat Lng and pass into Form properties
+                    helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
+                    helpers_Projection.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
 
 
+                    CropProperties crop = new CropProperties(minLat, minLng, maxLat, maxLng, centreLat, centreLng);
 
-                // Open shapefile from path
-                Shapefile shp = Shapefile.OpenFile(path);
-                string prjStr = shp.ProjectionString;
-                string prj = shp.Projection.ToString();
-
-                // Find extents of shapefile
-                double minLng = shp.Extent.MinX;
-                double minLat = shp.Extent.MinY;
-
-                double maxLng = shp.Extent.MaxX;
-                double maxLat = shp.Extent.MaxY;
-
-
-                // Convert projection to Lat Lng and pass into Form
-                helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
-                helpers_Projection.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
-
-                helpers_UI.DisplayForm(minLng, minLat, maxLng, maxLat);
+                    properties.Add(crop);
+                }
+                helpers_UI.DisplayForm(properties);
             }
 
         }

@@ -21,11 +21,11 @@ namespace Earthworm
     public partial class form_mapBrowser : Form
     {
 
-        CropProperties _properties;
+        List<CropProperties> _properties = new List<CropProperties>();
 
-        public form_mapBrowser(CropProperties _prop)
+        public form_mapBrowser(List<CropProperties> properties)
         {
-            _properties = _prop;
+            _properties = properties;
             InitializeComponent();
         }
 
@@ -34,28 +34,37 @@ namespace Earthworm
             // Initialize map
             gmap.MapProvider = GMapProviders.GoogleHybridMap;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gmap.Position = new PointLatLng(0, 0);
-            gmap.MinZoom = 1;
-            gmap.MaxZoom = 24;
-            gmap.Zoom = 1;
-            gmap.ShowCenter = false;
-
-            // Initialize shapefile boundaries
             GMapOverlay polygons = new GMapOverlay("polygons");
-            List<PointLatLng> points = new List<PointLatLng>();
+            foreach (CropProperties property in _properties)
+            {
 
-            // Create polygons + add to map Lat = Y, Lng = X
-            points.Add(new PointLatLng(_properties.minLat, _properties.minLng));
-            points.Add(new PointLatLng(_properties.maxLat, _properties.minLng));
-            points.Add(new PointLatLng(_properties.maxLat, _properties.maxLng));
-            points.Add(new PointLatLng(_properties.minLat, _properties.maxLng));
+                gmap.Position = new PointLatLng(property.maxLat, property.maxLng);
+                gmap.MinZoom = 1;
+                gmap.MaxZoom = 24;
+                gmap.Zoom = 5;
+                gmap.ShowCenter = false;
 
-            // Creates polygons
-            GMapPolygon polygon = new GMapPolygon(points, "Extents");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-            polygon.Stroke = new Pen(Color.Red, 1);
-            polygons.Polygons.Add(polygon);
-            gmap.Overlays.Add(polygons);
+
+
+                // Initialize shapefile boundaries
+
+                List<PointLatLng> points = new List<PointLatLng>();
+
+                // Create polygons + add to map Lat = Y, Lng = X
+                points.Add(new PointLatLng(property.minLat, property.minLng));
+                points.Add(new PointLatLng(property.maxLat, property.minLng));
+                points.Add(new PointLatLng(property.maxLat, property.maxLng));
+                points.Add(new PointLatLng(property.minLat, property.maxLng));
+
+                // Creates polygons
+                GMapPolygon polygon = new GMapPolygon(points, "Extents");
+                polygon.Fill = new SolidBrush(Color.FromArgb(25, Color.Green));
+                polygon.Stroke = new Pen(Color.Red, 1);
+                polygons.Polygons.Add(polygon);
+                gmap.Overlays.Add(polygons);
+
+            }
+
 
         }
 
