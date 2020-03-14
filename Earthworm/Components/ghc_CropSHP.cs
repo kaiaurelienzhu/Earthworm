@@ -4,9 +4,8 @@ using DotSpatial.Data.Forms;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Windows.Forms;
-
-
-
+using DotSpatial.Data;
+using DotSpatial.Topology;
 
 namespace Earthworm.Components
 {
@@ -28,6 +27,12 @@ namespace Earthworm.Components
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddBooleanParameter("Run", "R", "Press to run", GH_ParamAccess.item);
+            
+            // Compulsory inputs
+            Params.Input[
+            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item)
+            ].Optional = true;
+
         }
 
         /// <summary>
@@ -49,8 +54,31 @@ namespace Earthworm.Components
 
             if (runIt)
             {
-                helpers_UI.DisplayForm();
-               
+
+                // Setup inputs
+                string path = "";
+                if (!DA.GetData("Path", ref path)) return;
+
+
+
+                // Open shapefile from path
+                Shapefile shp = Shapefile.OpenFile(path);
+                string prjStr = shp.ProjectionString;
+                string prj = shp.Projection.ToString();
+
+                // Find extents of shapefile
+                double minLng = shp.Extent.MinX;
+                double minLat = shp.Extent.MinY;
+
+                double maxLng = shp.Extent.MaxX;
+                double maxLat = shp.Extent.MaxY;
+
+
+                // Convert projection to Lat Lng and pass into Form
+                helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
+                helpers_Projection.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
+
+                helpers_UI.DisplayForm(minLng, minLat, maxLng, maxLat);
             }
 
         }

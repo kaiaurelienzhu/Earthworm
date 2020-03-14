@@ -39,6 +39,9 @@ C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\vi-VN\DotSpatial.Projec
 C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\zh-CN\DotSpatial.Projections.Forms.resources.dll
 C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\bin\de-DE\DotSpatial.Symbology.resources.dll
 C:\Users\kai\Documents\GitHub\WormGIS-master\WormGIS\obj\Debug\Earthworm.csproj.CopyComplete
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.form_mapBrowser.resources
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.Properties.Resources.resources
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csproj.GenerateResource.cache
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\Earthworm.dll.config
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\Earthworm.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\Earthworm.pdb
@@ -94,9 +97,6 @@ C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\th\DotSpatial.Proje
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\vi-VN\DotSpatial.Projections.Forms.resources.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\zh-CN\DotSpatial.Projections.Forms.resources.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\de-DE\DotSpatial.Symbology.resources.dll
-C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.form_mapBrowser.resources
-C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csproj.GenerateResource.cache
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csproj.CopyComplete
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.pdb
-C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.Properties.Resources.resources
