@@ -32,6 +32,19 @@ namespace Earthworm
             gmap.MinZoom = 1;
             gmap.MaxZoom = 24;
             gmap.Zoom = 1;
+            gmap.ShowCenter = false;
+            GMapOverlay polygons = new GMapOverlay("polygons");
+            List<PointLatLng> points = new List<PointLatLng>();
+            points.Add(new PointLatLng(48.866383, 2.323575));
+            points.Add(new PointLatLng(48.863868, 2.321554));
+            points.Add(new PointLatLng(48.861017, 2.330030));
+            points.Add(new PointLatLng(48.863727, 2.331918));
+            GMapPolygon polygon = new GMapPolygon(points, "Jardin des Tuileries");
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+            polygon.Stroke = new Pen(Color.Red, 1);
+            polygons.Polygons.Add(polygon);
+            gmap.Overlays.Add(polygons);
+
 
 
         }
