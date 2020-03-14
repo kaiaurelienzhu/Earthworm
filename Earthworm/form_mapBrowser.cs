@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,45 +34,41 @@ namespace Earthworm
             gmap.MaxZoom = 24;
             gmap.Zoom = 1;
             gmap.ShowCenter = false;
-            GMapOverlay polygons = new GMapOverlay("polygons");
+
+            // Add a marker
+            //GMap.NET.WindowsForms.GMapOverlay markers = new GMap.NET.WindowsForms.GMapOverlay("markers");
+            //GMap.NET.WindowsForms.GMapMarker marker =
+            //    new GMap.NET.WindowsForms.Markers.GMarkerGoogle(
+            //        new GMap.NET.PointLatLng(48.8617774, 2.349272),
+            //        GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue_pushpin);
+            //marker.ToolTipText = "hello\nout there";
+            //markers.Markers.Add(marker);
+            //gmap.Overlays.Add(markers);
+
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(new PointLatLng(48.866383, 2.323575));
             points.Add(new PointLatLng(48.863868, 2.321554));
             points.Add(new PointLatLng(48.861017, 2.330030));
             points.Add(new PointLatLng(48.863727, 2.331918));
-            GMapPolygon polygon = new GMapPolygon(points, "Jardin des Tuileries");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-            polygon.Stroke = new Pen(Color.Red, 1);
-            polygons.Polygons.Add(polygon);
-            gmap.Overlays.Add(polygons);
 
 
-
-        }
-
-        private void gmap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
-        {
-            Console.WriteLine(String.Format("Polygon {0} with tag {1} was clicked",
-                item.Name, item.Tag));
         }
 
         private void gmap_MouseClick(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("This is just a test");
-        }
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                double lat = gmap.FromLocalToLatLng(e.X, e.Y).Lat;
+                double lng = gmap.FromLocalToLatLng(e.X, e.Y).Lng;
+                GMapOverlay markers = new GMapOverlay("Markers");
+                GMapMarker marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(
+                                new GMap.NET.PointLatLng(lat, lng),
+                                GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue_pushpin);
+                marker.ToolTipText = "Hello out there";
+                markers.Markers.Add(marker);
+                gmap.Overlays.Add(markers);
 
-        private void gmap_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine("This is just a test");
-        }
-
-        private void gmap_OnPolygonEnter(GMapPolygon item, MouseEventArgs e)
-        {
-            Console.WriteLine("This is just a test");
-        }
-
-        private void form_mapBrowser_Load(object sender, EventArgs e)
-        {
+            }
 
         }
     }

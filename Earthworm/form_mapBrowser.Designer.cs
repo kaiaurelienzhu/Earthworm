@@ -64,7 +64,6 @@
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 2D;
             this.gmap.Load += new System.EventHandler(this.gMapControl1_Load);
-            this.gmap.Click += new System.EventHandler(this.gmap_Click);
             this.gmap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gmap_MouseClick);
             // 
             // form_mapBrowser
@@ -75,7 +74,6 @@
             this.Controls.Add(this.gmap);
             this.Name = "form_mapBrowser";
             this.Text = "Earthworm Viewer";
-            this.Load += new System.EventHandler(this.form_mapBrowser_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
