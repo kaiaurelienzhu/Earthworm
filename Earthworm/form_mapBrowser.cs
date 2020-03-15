@@ -92,29 +92,27 @@ namespace Earthworm
 
         }
 
-        private void gmap_MouseClick(object sender, MouseEventArgs e)
+
+
+        private void gmap_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // Setup map overlay
-            GMapOverlay polygons = new GMapOverlay("Polygons");
+            GMapOverlay polygonOverlay = new GMapOverlay("Polygons");
             CropProperties crop = _properties[0];
             List<PointLatLng> pts = crop.uiCrop;
 
-      
+
             // Register left mouse button
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-
-
                 PointLatLng pt = gmap.FromLocalToLatLng(e.X, e.Y);
-
-                if (crop.uiCrop.Count < 2)
+                if (pts.Count < 2)
                 {
                     pts.Add(pt);
                 }
-              
 
 
-                // Add a bounding box to
+                // Add a bounding box to map
                 if (crop.uiCrop.Count == 2)
                 {
                     List<PointLatLng> finalPts = new List<PointLatLng>();
@@ -132,18 +130,11 @@ namespace Earthworm
                     GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
                     cropB.Fill = new SolidBrush(Color.FromArgb(20, Color.White));
                     cropB.Stroke = new Pen(Color.Red, 2);
-                    polygons.Polygons.Add(cropB);
-                    gmap.Overlays.Add(polygons);
-                    gmap.Visible = false;
-                    gmap.Visible = true;
+                    gmap.Overlays.Add(polygonOverlay);
+                    polygonOverlay.Polygons.Add(cropB);
+
                 }
-
-
-               
             }
-
-            
-
         }
-    }
+    } 
 }
