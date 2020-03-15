@@ -128,23 +128,21 @@ namespace Earthworm
                 GMapMarker marker = new GMarkerGoogle(pt, GMarkerGoogleType.blue_pushpin);
                 polygons.Markers.Add(marker);
                 gmap.Overlays.Add(polygons);
+
+                List<PointLatLng> cropPts = new List<PointLatLng>();
+                cropPts.Add(pt);
+                cropPts.Add(new PointLatLng(1, 0));
+                cropPts.Add(new PointLatLng(1, 1));
+                cropPts.Add(new PointLatLng(0, 1));
+
+                // add crop polygon to map
+                GMapPolygon cropB = new GMapPolygon(cropPts, "Crop");
+                cropB.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
+                cropB.Stroke = new Pen(Color.Red, 2);
+                polygons.Polygons.Add(cropB);
+                gmap.Overlays.Add(polygons);
+
                 
-                if (crop == null)
-                {
-                    List<PointLatLng> cropPts = new List<PointLatLng>();
-                    cropPts.Add(new PointLatLng(0, 0));
-                    cropPts.Add(new PointLatLng(1, 0));
-                    cropPts.Add(new PointLatLng(1, 1));
-                    cropPts.Add(new PointLatLng(0, 1));
-
-                    // add crop polygon to map
-                    GMapPolygon cropB = new GMapPolygon(cropPts, "Crop");
-                    cropB.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
-                    cropB.Stroke = new Pen(Color.Red, 2);
-                    polygons.Polygons.Add(cropB);
-                    gmap.Overlays.Add(polygons);
-
-                }
 
             }
 

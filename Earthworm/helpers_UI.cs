@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using GMap.NET.WindowsForms.ToolTips;
 
 
 namespace Earthworm
@@ -32,9 +37,10 @@ namespace Earthworm
         private double _minCropLng;
         private double _maxCropLat;
         private double _maxCropLng;
+        public List<PointLatLng> _uiCrop;
 
 
-        public CropProperties(double minLat, double minLng, double maxLat, double maxLng, double minCropLat, double minCropLng, double maxCropLat, double maxCropLng)
+        public CropProperties(double minLat, double minLng, double maxLat, double maxLng, double minCropLat, double minCropLng, double maxCropLat, double maxCropLng, List<PointLatLng> uiCrop)
         {
             _minLat = minLat;
             _minLng = minLng;
@@ -44,6 +50,7 @@ namespace Earthworm
             _minCropLng = minCropLng;
             _maxCropLat = maxCropLat;
             _maxCropLng = maxCropLng;
+            _uiCrop = uiCrop;
         }
 
 
