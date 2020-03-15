@@ -6,6 +6,11 @@ using Rhino.Geometry;
 using System.Windows.Forms;
 using DotSpatial.Data;
 using DotSpatial.Topology;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using GMap.NET.WindowsForms.ToolTips;
 
 namespace Earthworm.Components
 {
@@ -107,9 +112,15 @@ namespace Earthworm.Components
                     // Convert shp XY vals to Lat Lng and pass into Form properties
                     helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
                     helpers_Projection.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
-                    
+
+                    PointLatLng minExtent = new PointLatLng(minLat, minLng);
+                    PointLatLng maxExtent = new PointLatLng(maxLat, maxLng);
+                    PointLatLng minCrop = new PointLatLng(minCropLat, minCropLng);
+                    PointLatLng maxCrop = new PointLatLng(maxCropLat, maxCropLng);
+                    List<PointLatLng> uiCrop = new List<PointLatLng>();
+
                     // Create crop properties
-                    CropProperties crop = new CropProperties(minLat, minLng, maxLat, maxLng, minCropLat, minCropLng, maxCropLat, maxCropLng);
+                    CropProperties crop = new CropProperties(minExtent, maxExtent, minCrop, maxCrop, uiCrop);
                     properties.Add(crop);
                 }
 

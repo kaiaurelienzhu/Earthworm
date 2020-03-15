@@ -35,12 +35,11 @@ namespace Earthworm
             gmap.MapProvider = GMapProviders.GoogleHybridMap;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             GMapOverlay polygons = new GMapOverlay("polygons");
+            List<PointLatLng> uiCropPts = _properties[0].uiCrop;
 
             foreach (CropProperties property in _properties)
             {
-
-
-                gmap.Position = new PointLatLng(property.maxLat, property.maxLng);
+                gmap.Position = property.maxExtent;
                 gmap.MinZoom = 1;
                 gmap.MaxZoom = 24;
                 gmap.Zoom = 10;
@@ -48,14 +47,13 @@ namespace Earthworm
 
 
                 // Initialize shapefile boundaries
-
                 List<PointLatLng> points = new List<PointLatLng>();
 
                 // Create polygons + add to map Lat = Y, Lng = X
-                points.Add(new PointLatLng(property.minLat, property.minLng));
-                points.Add(new PointLatLng(property.maxLat, property.minLng));
-                points.Add(new PointLatLng(property.maxLat, property.maxLng));
-                points.Add(new PointLatLng(property.minLat, property.maxLng));
+                points.Add(property.minExtent);
+                points.Add(new PointLatLng(property.maxExtent.Lat, property.minExtent.Lng));
+                points.Add(property.maxExtent);
+                points.Add(new PointLatLng(property.minExtent.Lat, property.maxExtent.Lng));
 
                 // Creates polygons
                 GMapPolygon polygon = new GMapPolygon(points, "Extents");
@@ -76,10 +74,10 @@ namespace Earthworm
                 List<PointLatLng> cropPts = new List<PointLatLng>();
 
 
-                cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.minCropLng));
-                cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.minCropLng));
-                cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.maxCropLng));
-                cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.maxCropLng));
+                cropPts.Add(firstCrop.minCrop);
+                cropPts.Add(new PointLatLng(firstCrop.maxCrop.Lat, firstCrop.minCrop.Lng));
+                cropPts.Add(firstCrop.maxCrop);
+                cropPts.Add(new PointLatLng(firstCrop.minCrop.Lat, firstCrop.maxCrop.Lng));
 
 
                 // ADD POLYGON TO MAP
@@ -91,25 +89,6 @@ namespace Earthworm
 
             }
 
-            // UI input
-            else
-            {
-                List<PointLatLng> cropPts = new List<PointLatLng>();
-
-
-                cropPts.Add(new PointLatLng(0,0));
-                cropPts.Add(new PointLatLng(1,0));
-                cropPts.Add(new PointLatLng(1,1));
-                cropPts.Add(new PointLatLng(0,1));
-
-
-                // add crop polygon to map
-                GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
-                crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
-                crop.Stroke = new Pen(Color.Red, 2);
-                polygons.Polygons.Add(crop);
-                gmap.Overlays.Add(polygons);
-            }
 
         }
 
@@ -118,32 +97,49 @@ namespace Earthworm
             // Setup map overlay
             GMapOverlay polygons = new GMapOverlay("Polygons");
             CropProperties crop = _properties[0];
+            List<PointLatLng> pts = crop.uiCrop;
 
+      
             // Register left mouse button
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-               
+
+
                 PointLatLng pt = gmap.FromLocalToLatLng(e.X, e.Y);
-       
-                GMapMarker marker = new GMarkerGoogle(pt, GMarkerGoogleType.blue_pushpin);
-                polygons.Markers.Add(marker);
-                gmap.Overlays.Add(polygons);
 
-                List<PointLatLng> cropPts = new List<PointLatLng>();
-                cropPts.Add(pt);
-                cropPts.Add(new PointLatLng(1, 0));
-                cropPts.Add(new PointLatLng(1, 1));
-                cropPts.Add(new PointLatLng(0, 1));
+                if (crop.uiCrop.Count < 2)
+                {
+                    pts.Add(pt);
+                }
+              
 
-                // add crop polygon to map
-                GMapPolygon cropB = new GMapPolygon(cropPts, "Crop");
-                cropB.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
-                cropB.Stroke = new Pen(Color.Red, 2);
-                polygons.Polygons.Add(cropB);
-                gmap.Overlays.Add(polygons);
 
-                
+                // Add a bounding box to
+                if (crop.uiCrop.Count == 2)
+                {
+                    List<PointLatLng> finalPts = new List<PointLatLng>();
 
+                    PointLatLng pt0 = pts[0];
+                    PointLatLng pt1 = new PointLatLng(pts[1].Lat, pts[0].Lng);
+                    PointLatLng pt2 = pts[1];
+                    PointLatLng pt3 = new PointLatLng(pts[0].Lat, pts[1].Lng);
+
+                    finalPts.Add(pt0);
+                    finalPts.Add(pt1);
+                    finalPts.Add(pt2);
+                    finalPts.Add(pt3);
+
+                    GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
+                    cropB.Fill = new SolidBrush(Color.FromArgb(20, Color.White));
+                    cropB.Stroke = new Pen(Color.Red, 2);
+                    polygons.Polygons.Add(cropB);
+                    gmap.Overlays.Add(polygons);
+                    gmap.Visible = false;
+                    gmap.Visible = true;
+                }
+
+
+               
             }
 
             

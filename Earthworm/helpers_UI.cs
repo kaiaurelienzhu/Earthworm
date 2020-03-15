@@ -29,134 +29,88 @@ namespace Earthworm
     // Create properties which must be met for each shapefile
     public class CropProperties
     {
-        private double _minLat;
-        private double _minLng;
-        private double _maxLat;
-        private double _maxLng;
-        private double _minCropLat;
-        private double _minCropLng;
-        private double _maxCropLat;
-        private double _maxCropLng;
+        private PointLatLng _minExtent;
+        private PointLatLng _maxExtent;
+        private PointLatLng _minCrop;
+        private PointLatLng _maxCrop;
         public List<PointLatLng> _uiCrop;
 
 
-        public CropProperties(double minLat, double minLng, double maxLat, double maxLng, double minCropLat, double minCropLng, double maxCropLat, double maxCropLng, List<PointLatLng> uiCrop)
+        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop)
         {
-            _minLat = minLat;
-            _minLng = minLng;
-            _maxLat = maxLat;
-            _maxLng = maxLng;
-            _minCropLat = minCropLat;
-            _minCropLng = minCropLng;
-            _maxCropLat = maxCropLat;
-            _maxCropLng = maxCropLng;
+            _minExtent = minExtent;
+            _maxExtent = maxExtent;
+            _minCrop = minCrop;
+            _maxCrop = maxCrop;
             _uiCrop = uiCrop;
         }
 
 
-        public double minLat
+        public PointLatLng minExtent
         {
             get
             {
-                return _minLat;
+                return _minExtent;
             }
 
             set
             {
-                _minLat = value;
+                _minExtent = value;
             }
         }
 
-        public double minLng
+        public PointLatLng maxExtent
         {
             get
             {
-                return _minLng;
+                return _maxExtent;
             }
 
             set
             {
-                _minLng = value;
+                _maxExtent = value;
             }
         }
 
-        public double maxLat
+        public PointLatLng minCrop
         {
             get
             {
-                return _maxLat;
+                return _minCrop;
             }
 
             set
             {
-                _maxLat = value;
+                _minCrop = value;
             }
         }
 
-        public double maxLng
+        public PointLatLng maxCrop
         {
             get
             {
-                return _maxLng;
+                return _maxCrop;
             }
 
             set
             {
-                _maxLng = value;
+                _maxCrop = value;
             }
         }
 
-        public double minCropLat
+        public List<PointLatLng> uiCrop
         {
             get
             {
-                return _minCropLat;
+                return _uiCrop;
             }
 
             set
             {
-                _minCropLat = value;
+                _uiCrop = value;
             }
         }
 
-        public double minCropLng
-        {
-            get
-            {
-                return _minCropLng;
-            }
-
-            set
-            {
-                _minCropLng = value;
-            }
-        }
-
-        public double maxCropLat
-        {
-            get
-            {
-                return _maxCropLat;
-            }
-
-            set
-            {
-                _maxCropLat = value;
-            }
-        }
-
-        public double maxCropLng
-        {
-            get
-            {
-                return _maxCropLng;
-            }
-
-            set
-            {
-                _maxCropLng = value;
-            }
-        }
 
     }
 
