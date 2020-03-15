@@ -35,12 +35,12 @@ namespace Earthworm.Components
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("South West", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("South West Point", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
 
             Params.Input[
-            pManager.AddNumberParameter("North East", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("North East Point", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
         }
@@ -61,6 +61,8 @@ namespace Earthworm.Components
             bool runIt = false;
             if (!DA.GetData("Run", ref runIt)) return;
 
+            
+
             if (runIt)
 
             {
@@ -72,8 +74,10 @@ namespace Earthworm.Components
                 List<double> SW = new List<double>();
                 if (!DA.GetDataList(2, SW)) return;
 
+
                 List<double> NE = new List<double>();
-                if (!DA.GetDataList(3, NE)) return;
+                DA.GetDataList(3, NE);
+
 
                 List<CropProperties> properties = new List<CropProperties>();
 

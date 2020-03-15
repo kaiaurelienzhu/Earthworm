@@ -60,7 +60,7 @@
             this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gmap.ShowTileGridLines = false;
-            this.gmap.Size = new System.Drawing.Size(753, 372);
+            this.gmap.Size = new System.Drawing.Size(1004, 499);
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 2D;
             this.gmap.Load += new System.EventHandler(this.gMapControl1_Load);
@@ -70,7 +70,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(777, 396);
+            this.ClientSize = new System.Drawing.Size(1028, 523);
             this.Controls.Add(this.gmap);
             this.Name = "form_mapBrowser";
             this.Text = "Earthworm Viewer";
