@@ -69,15 +69,18 @@ namespace Earthworm
             // WIP CREATE CROP POLYGON WITH DYNAMIC INPUT
             CropProperties firstCrop = _properties[0];
             List<PointLatLng> cropPts = new List<PointLatLng>();
-            //cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.minCropLng));
-            //cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.minCropLng));
-            //cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.maxCropLng));
-            //cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.maxCropLng));
-            cropPts.Add(new PointLatLng(0, 0));
-            cropPts.Add(new PointLatLng(1, 0));
-            cropPts.Add(new PointLatLng(1, 1));
-            cropPts.Add(new PointLatLng(0, 1));
 
+
+            cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.minCropLng));
+            cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.minCropLng));
+            cropPts.Add(new PointLatLng(firstCrop.maxCropLat, firstCrop.maxCropLng));
+            cropPts.Add(new PointLatLng(firstCrop.minCropLat, firstCrop.maxCropLng));
+            
+            // Crops to match extents
+            //cropPts.Add(new PointLatLng(firstCrop.minLat, firstCrop.minLng));
+            //cropPts.Add(new PointLatLng(firstCrop.maxLat, firstCrop.minLng));
+            //cropPts.Add(new PointLatLng(firstCrop.maxLat, firstCrop.maxLng));
+            //cropPts.Add(new PointLatLng(firstCrop.minLat, firstCrop.maxLng));
 
             // AWDD POLYGON TO MAP
             GMapPolygon crop = new GMapPolygon(cropPts, "Crop");

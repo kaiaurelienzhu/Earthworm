@@ -73,7 +73,7 @@ namespace Earthworm.Components
                 if (!DA.GetDataList(2, SW)) return;
 
                 List<double> NE = new List<double>();
-                if (!DA.GetDataList(2, NE)) return;
+                if (!DA.GetDataList(3, NE)) return;
 
                 List<CropProperties> properties = new List<CropProperties>();
 
@@ -94,18 +94,13 @@ namespace Earthworm.Components
                     double centreLng = shp.Extent.Center.X;
                     double centreLat = shp.Extent.Center.Y;
 
-                    double minCropLng;
-                    double minCropLat;
-                    double maxCropLng;
-                    double maxCropLat;
+                    // Reference inputs must be valid lat long
+                    double minCropLng = SW[1];
+                    double minCropLat = SW[0];
+                    double maxCropLng = NE[1];
+                    double maxCropLat = NE[0];
 
-                    string WGS1984 = DotSpatial.Projections.KnownCoordinateSystems.Projected.UtmWgs1984.ToString();
-
-                    helpers_Projection.UTMToLatLongDSP(SW[1], SW[0], WGS1984, out minCropLat, out minCropLng);
-                    helpers_Projection.UTMToLatLongDSP(NE[1], NE[0], prjStr, out maxCropLat, out maxCropLng);
-
-
-                    // Convert XY vals to Lat Lng and pass into Form properties
+                    // Convert shp XY vals to Lat Lng and pass into Form properties
                     helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
                     helpers_Projection.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
                     

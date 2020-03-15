@@ -32,8 +32,6 @@ namespace Earthworm
         private double _minCropLng;
         private double _maxCropLat;
         private double _maxCropLng;
-        private double _centreLat;
-        private double _centreLng;
 
 
         public CropProperties(double minLat, double minLng, double maxLat, double maxLng, double minCropLat, double minCropLng, double maxCropLat, double maxCropLng)
