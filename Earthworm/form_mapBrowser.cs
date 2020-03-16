@@ -28,13 +28,15 @@ namespace Earthworm
             _properties = properties;
             InitializeComponent();
         }
-
+        GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
+        GMapOverlay cropOverlay = new GMapOverlay("Crop overlay");
+        GMapOverlay uiOverlay = new GMapOverlay("UI overlay");
         private void gMapControl1_Load(object sender, EventArgs e)
         {
             // Initialize map
             gmap.MapProvider = GMapProviders.GoogleHybridMap;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            GMapOverlay polygons = new GMapOverlay("polygons");
+
             List<PointLatLng> uiCropPts = _properties[0].uiCrop;
 
             foreach (CropProperties property in _properties)
@@ -59,7 +61,8 @@ namespace Earthworm
                 GMapPolygon polygon = new GMapPolygon(points, "Extents");
                 polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Orange));
                 polygon.Stroke = new Pen(Color.Orange, 1);
-                polygons.Polygons.Add(polygon);
+                extentOverlay.Polygons.Add(polygon);
+                gmap.Overlays.Add(extentOverlay);
 
 
             }
@@ -84,8 +87,8 @@ namespace Earthworm
                 GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
                 crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
                 crop.Stroke = new Pen(Color.Red, 2);
-                polygons.Polygons.Add(crop);
-                gmap.Overlays.Add(polygons);
+                cropOverlay.Polygons.Add(crop);
+                gmap.Overlays.Add(cropOverlay);
 
             }
 
@@ -96,8 +99,19 @@ namespace Earthworm
 
         private void gmap_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            uiOverlay.Clear();
+            cropOverlay.Clear();
+        }
+
+        private void gmap_MouseClick(object sender, MouseEventArgs e)
+        {
             // Setup map overlay
-            GMapOverlay polygonOverlay = new GMapOverlay("Polygons");
+
             CropProperties crop = _properties[0];
             List<PointLatLng> pts = crop.uiCrop;
 
@@ -106,15 +120,20 @@ namespace Earthworm
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 PointLatLng pt = gmap.FromLocalToLatLng(e.X, e.Y);
-                if (pts.Count < 2)
+                pts.Add(pt);
+
+
+                if (pts.Count > 2)
                 {
+                    pts.Clear();
+                    uiOverlay.Clear();
                     pts.Add(pt);
                 }
-
 
                 // Add a bounding box to map
                 if (crop.uiCrop.Count == 2)
                 {
+                    uiOverlay.Clear();
                     List<PointLatLng> finalPts = new List<PointLatLng>();
 
                     PointLatLng pt0 = pts[0];
@@ -130,8 +149,8 @@ namespace Earthworm
                     GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
                     cropB.Fill = new SolidBrush(Color.FromArgb(20, Color.White));
                     cropB.Stroke = new Pen(Color.Red, 2);
-                    gmap.Overlays.Add(polygonOverlay);
-                    polygonOverlay.Polygons.Add(cropB);
+                    gmap.Overlays.Add(uiOverlay);
+                    uiOverlay.Polygons.Add(cropB);
 
                 }
             }
