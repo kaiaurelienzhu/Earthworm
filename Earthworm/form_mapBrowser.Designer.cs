@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gmap = new GMap.NET.WindowsForms.GMapControl();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gmap
@@ -61,28 +60,17 @@
             this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gmap.ShowTileGridLines = false;
-            this.gmap.Size = new System.Drawing.Size(1013, 499);
+            this.gmap.Size = new System.Drawing.Size(1004, 499);
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 2D;
             this.gmap.Load += new System.EventHandler(this.gMapControl1_Load);
-            this.gmap.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gmap_MouseDoubleClick_1);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1044, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Reset Crop";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.gmap.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gmap_MouseDoubleClick);
             // 
             // form_mapBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1131, 523);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1028, 523);
             this.Controls.Add(this.gmap);
             this.Name = "form_mapBrowser";
             this.Text = "Earthworm Viewer";
@@ -94,6 +82,5 @@
         #endregion
 
         public GMap.NET.WindowsForms.GMapControl gmap;
-        private System.Windows.Forms.Button button1;
     }
 }
