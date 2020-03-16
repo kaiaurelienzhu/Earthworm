@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DotSpatial.Data.Forms;
-using Grasshopper.Kernel;
-using Rhino.Geometry;
-using System.Windows.Forms;
-using DotSpatial.Data;
-using DotSpatial.Topology;
+﻿using DotSpatial.Data;
 using GMap.NET;
-using GMap.NET.MapProviders;
-using GMap.NET.WindowsForms;
-using GMap.NET.WindowsForms.Markers;
-using GMap.NET.WindowsForms.ToolTips;
+using Grasshopper.Kernel;
+using System;
+using System.Collections.Generic;
 
 namespace Earthworm.Components
 {
@@ -31,6 +23,10 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            List<double> min = new List<double>();
+            min.Add(0);
+            min.Add(0);
+
             // Compulsory inputs
             pManager.AddBooleanParameter("Run", "R", "Press to run", GH_ParamAccess.item);
             
@@ -40,13 +36,13 @@ namespace Earthworm.Components
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("South West Point", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("South West Point", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list, 0)
             ].Optional = true;
-
 
             Params.Input[
-            pManager.AddNumberParameter("North East Point", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("North East Point", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list, 0)
             ].Optional = true;
+
 
         }
 
@@ -81,7 +77,7 @@ namespace Earthworm.Components
 
 
                 List<double> NE = new List<double>();
-                DA.GetDataList(3, NE);
+                if (!DA.GetDataList(3, NE)) return;
 
 
                 List<CropProperties> properties = new List<CropProperties>();
@@ -103,11 +99,13 @@ namespace Earthworm.Components
                     double centreLng = shp.Extent.Center.X;
                     double centreLat = shp.Extent.Center.Y;
 
+
+
                     // Reference inputs must be valid lat long
-                    double minCropLng = SW[1];
-                    double minCropLat = SW[0];
-                    double maxCropLng = NE[1];
-                    double maxCropLat = NE[0];
+                    var minCropLng = SW[1];
+                    var minCropLat = SW[0];
+                    var maxCropLng = NE[1];
+                    var maxCropLat = NE[0];
 
                     // Convert shp XY vals to Lat Lng and pass into Form properties
                     helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
