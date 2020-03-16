@@ -23,10 +23,12 @@ namespace Earthworm
 
         List<CropProperties> _properties = new List<CropProperties>();
 
+
         public form_mapBrowser(List<CropProperties> properties)
         {
             _properties = properties;
             InitializeComponent();
+
         }
         GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
         GMapOverlay cropOverlay = new GMapOverlay("Crop overlay");
@@ -155,5 +157,18 @@ namespace Earthworm
                 }
             }
         }
-    } 
+
+        protected override void OnResizeBegin(EventArgs e)
+        {
+            SuspendLayout();
+            base.OnResizeBegin(e);
+        }
+        protected override void OnResizeEnd(EventArgs e)
+        {
+            ResumeLayout();
+            base.OnResizeEnd(e);
+        }
+
+
+    }  
 }
