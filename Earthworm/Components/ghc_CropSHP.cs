@@ -86,9 +86,9 @@ namespace Earthworm.Components
             if (runIt)
 
             {
-
                 List<CropProperties> properties = new List<CropProperties>();
 
+                // Iterate through file paths
                 foreach (string path in paths)
                 {
                     // Open shapefile from path

@@ -41,6 +41,8 @@ namespace Earthworm
 
             List<PointLatLng> uiCropPts = _properties[0].uiCrop;
 
+            
+
             foreach (CropProperties property in _properties)
             {
                 gmap.Position = property.maxExtent;
@@ -73,8 +75,12 @@ namespace Earthworm
             // Create dynamic input crop
             CropProperties firstCrop = _properties[0];
 
-            // Parametric input
-            if (firstCrop != null)
+            // Check if no specified lat and long
+            PointLatLng nullPt = new PointLatLng(0, 0);
+
+
+            // Parametric crop input (lat long)
+            if (firstCrop.maxCrop == nullPt)
             {
                 List<PointLatLng> cropPts = new List<PointLatLng>();
 
