@@ -23,9 +23,7 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            List<double> min = new List<double>();
-            min.Add(0);
-            min.Add(0);
+
 
             // Compulsory inputs
             pManager.AddBooleanParameter("Run", "R", "Press to run", GH_ParamAccess.item);
@@ -36,11 +34,11 @@ namespace Earthworm.Components
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("South West Point", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list, 0)
+            pManager.AddNumberParameter("South West Point", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("North East Point", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list, 0)
+            pManager.AddNumberParameter("North East Point", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
 
@@ -62,23 +60,32 @@ namespace Earthworm.Components
             bool runIt = false;
             if (!DA.GetData("Run", ref runIt)) return;
 
-            
+            // Setup variables
+            List<string> paths = new List<string>();
+            if (!DA.GetDataList(1, paths)) return;
+
+
+            // Setup default inputs
+            List<double> SW = new List<double>();
+            DA.GetDataList(2, SW);
+            if (SW.Count == 0)
+            {
+                SW.Add(0);
+                SW.Add(0);
+            }
+
+            List<double> NE = new List<double>();
+            DA.GetDataList(3, NE);
+            if (NE.Count == 0)
+            {
+                NE.Add(0);
+                NE.Add(0);
+            }
+
 
             if (runIt)
 
             {
-
-                // Setup variables
-                List<string> paths = new List<string>();
-                if (!DA.GetDataList(1, paths)) return;
-
-                List<double> SW = new List<double>();
-                if (!DA.GetDataList(2, SW)) return;
-
-
-                List<double> NE = new List<double>();
-                if (!DA.GetDataList(3, NE)) return;
-
 
                 List<CropProperties> properties = new List<CropProperties>();
 
