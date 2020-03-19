@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino.Geometry;
 
 namespace Earthworm
 {
@@ -48,6 +49,25 @@ namespace Earthworm
 
             longitude = XY[0];
             latitude = XY[1];
+        }
+
+        public static void ProjectPts(Point3d point, string inPrjStr, string outPrjStr, out double outX, out double outY)
+        {
+            double[] XY = new double[2];
+            XY[0] = point.X;
+            XY[1] = point.Y;
+
+            double[] Z = new double[1];
+            Z[0] = 1;
+
+            //string utmStr = "+proj=utm +zone=30 +ellps=WGS84 +datum=WGS84 +units=m +no_defs ";
+
+            ProjectionInfo projIn = ProjectionInfo.FromProj4String(inPrjStr);
+            ProjectionInfo projOut = ProjectionInfo.FromProj4String(outPrjStr);
+            Reproject.ReprojectPoints(XY, Z, projIn, projOut, 0, 1);
+
+            outX = XY[0];
+            outY = XY[1];
         }
     }
 }
