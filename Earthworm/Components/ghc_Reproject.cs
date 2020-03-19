@@ -55,11 +55,6 @@ namespace Earthworm.Components
             string toPrj = "";
             DA.GetData(1, ref toPrj);
 
-            if (toPrj == "")
-            {
-                toPrj = "+proj=utm +zone=30 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
-
-            }
 
             List<Point3d> pts = new List<Point3d>();
             if (!DA.GetDataList(2, pts)) return;
@@ -74,7 +69,16 @@ namespace Earthworm.Components
                 double y = 0;
 
                 // Reproject pts 
-                helpers_Projection.ProjectPts(pt, fromPrj, toPrj, out x, out y);
+                if (toPrj == "")
+                {
+                    helpers_Projection.DefaultProjectPts(pt, fromPrj, out x, out y);
+                }
+
+                else
+                {
+                    helpers_Projection.ProjectPts(pt, fromPrj, toPrj, out x, out y);
+                }
+                
                 Point3d outPt = new Point3d(x, y, 0);
                 outPts.Add(outPt);
             }

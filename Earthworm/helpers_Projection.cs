@@ -69,5 +69,25 @@ namespace Earthworm
             outX = XY[0];
             outY = XY[1];
         }
+
+        public static void DefaultProjectPts(Point3d point, string inPrjStr, out double outX, out double outY)
+        {
+            double[] XY = new double[2];
+            XY[0] = point.X;
+            XY[1] = point.Y;
+
+            double[] Z = new double[1];
+            Z[0] = 1;
+
+            ProjectionInfo projIn = ProjectionInfo.FromProj4String(inPrjStr);
+            ProjectionInfo projOut = ProjectionInfo.FromProj4String(" + proj = longlat + ellps = WGS84 + datum = WGS84 + no_defs");
+            Reproject.ReprojectPoints(XY, Z, projIn, projOut, 0, 1);
+
+
+            outX = XY[0];
+            outY = XY[1];
+        }
+
+
     }
 }
