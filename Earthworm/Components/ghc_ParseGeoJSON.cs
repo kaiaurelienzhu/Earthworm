@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Text;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
@@ -25,6 +25,8 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Run", "R", "Press to run", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -32,6 +34,7 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            pManager.AddTextParameter("Path", "GJSON", "File path or directory of shapefile as string.", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -40,6 +43,21 @@ namespace Earthworm.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
+            bool runIt = false;
+            if (!DA.GetData("Run", ref runIt)) return;
+
+            string path = "";
+            if (!DA.GetData("Path", ref path)) return;
+
+            if (runIt)
+            {
+                StringBuilder strBuilder;
+                helpers_Projection.ConvertSHPtoGJSON(path, out strBuilder);
+                string gJSON = strBuilder.ToString();
+                DA.SetData(0, gJSON);
+            }
+          
         }
 
         /// <summary>

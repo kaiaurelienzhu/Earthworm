@@ -100,4 +100,7 @@ C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\de-DE\DotSpatial.Sy
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csproj.CopyComplete
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.pdb
-C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csprojAssemblyReference.cache
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\gdalconst_csharp.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\gdal_csharp.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\ogr_csharp.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\osr_csharp.dll

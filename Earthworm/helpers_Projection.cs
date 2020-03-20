@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
+using DotSpatial.Data;
+using OSGeo.GDAL;
+using OSGeo.OGR;
+using OSGeo.OSR;
 
 namespace Earthworm
 {
@@ -23,7 +27,7 @@ namespace Earthworm
             //string utmStr = "+proj=utm +zone=30 +ellps=WGS84 +datum=WGS84 +units=m +no_defs ";
 
 
-            ProjectionInfo projIn = KnownCoordinateSystems.Geographic.World.WGS1984;
+            ProjectionInfo projIn = ProjectionInfo.FromProj4String(" +proj=longlat +a=6378137 +b=6356752.31424518 +no_defs");
             ProjectionInfo projOut = ProjectionInfo.FromProj4String(utmStr);
 
             Reproject.ReprojectPoints(latlong, Z, projIn, projOut, 0, 1);
@@ -80,7 +84,7 @@ namespace Earthworm
             Z[0] = 1;
 
             ProjectionInfo projIn = ProjectionInfo.FromProj4String(inPrjStr);
-            ProjectionInfo projOut = ProjectionInfo.FromProj4String(" + proj = longlat + ellps = WGS84 + datum = WGS84 + no_defs");
+            ProjectionInfo projOut = ProjectionInfo.FromProj4String(" +proj=longlat +a=6378137 +b=6356752.31424518 +no_defs");
             Reproject.ReprojectPoints(XY, Z, projIn, projOut, 0, 1);
 
 
@@ -88,6 +92,51 @@ namespace Earthworm
             outY = XY[1];
         }
 
+        public static void ConvertSHPtoGJSON(string shapefilePath, out StringBuilder gJSON)
+        {
+            string shpPath = shapefilePath;
 
+            Ogr.RegisterAll();
+            OSGeo.OGR.Driver drv = Ogr.GetDriverByName("ESRI Shapefile");
+
+            var ds = drv.Open(shpPath, 0);
+
+            /*
+            Driver geoJSONDriver = Ogr.GetDriverByName("GeoJSON");
+
+            string geojsonfilepath = @"c:\temp\us_counties_test.json";
+
+            if (System.IO.File.Exists(geojsonfilepath))
+                System.IO.File.Delete(geojsonfilepath);
+
+            geoJSONDriver.CreateDataSource(@"c:\temp\us_counties_test.json", null);
+            */
+
+            OSGeo.OGR.Layer layer = ds.GetLayerByIndex(0);
+
+            OSGeo.OGR.Feature f;
+            layer.ResetReading();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            var options = new[]
+            {
+                "-f", "GeoJSON",
+                "-lco", "RFC7946=YES"
+            };
+
+
+            while ((f = layer.GetNextFeature()) != null)
+            {
+                var geom = f.GetGeometryRef();
+                if (geom != null)
+                {
+                    var geometryJson = geom.ExportToJson(options);
+                    sb.AppendLine(geometryJson);
+                }
+            }
+
+            gJSON = sb;
+        }
     }
 }

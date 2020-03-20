@@ -26,7 +26,7 @@ namespace Earthworm.Components
         /// new tabs/panels will automatically be created.
         /// </summary>
         public ghc_ParseSHP()
-          : base("ParseShapefile", "ParseSHP",
+          : base("Parse Shapefile", "ParseSHP",
               "Parses a shapefile into the Grasshopper environment",
               "Earthworm", "Utilities")
         {

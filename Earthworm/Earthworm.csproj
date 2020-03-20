@@ -68,6 +68,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="gdalconst_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.2.4.4\lib\net40\gdalconst_csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="gdal_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
+    </Reference>
     <Reference Include="GMap.NET.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\Kai Private Study\Programming\greatmaps (1)\sourceCode\greatmaps\Build\Release-NETv4.0\GMap.NET.Core.dll</HintPath>
@@ -82,6 +88,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ogr_csharp, Version=1.0.7372.36898, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.2.4.4\lib\net40\ogr_csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="osr_csharp, Version=1.0.7372.36898, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.2.4.4\lib\net40\osr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>packages\protobuf-net.2.4.0\lib\net40\protobuf-net.dll</HintPath>
@@ -129,13 +141,13 @@
     <Compile Include="Components\ghc_ParsePRJ.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
     <Compile Include="Components\ghc_Reproject.cs" />
-    <Compile Include="Components\ghc_XYZ.cs" />
     <Compile Include="form_mapBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_mapBrowser.Designer.cs">
       <DependentUpon>form_mapBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="GdalConfiguration.cs" />
     <Compile Include="helpers_Projection.cs" />
     <Compile Include="helpers_UI.cs" />
     <Compile Include="EarthwormInfo.cs" />
@@ -161,6 +173,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GdalConfiguration.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,10 +25,10 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("From Projection", "FromPrj", "The projection string of used for projections.", GH_ParamAccess.item);
+            pManager.AddTextParameter("From Projection", "FromPrjStr", "The projection string of used for projections.", GH_ParamAccess.item);
 
             Params.Input[
-            pManager.AddTextParameter("To Projection", "ToPrj", "The projection string of used for projections.", GH_ParamAccess.item)
+            pManager.AddTextParameter("To Projection", "ToPrjStr", "The projection string of used for projections.", GH_ParamAccess.item)
             ].Optional = true;
 
             pManager.AddPointParameter("Points", "Pt", "The points to be transformed by new projection.", GH_ParamAccess.list);

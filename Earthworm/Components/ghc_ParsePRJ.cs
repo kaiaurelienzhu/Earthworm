@@ -14,7 +14,7 @@ namespace Earthworm.Components
         /// Initializes a new instance of the ghc_ParsePRJ class.
         /// </summary>
         public ghc_ParsePRJ()
-          : base("ParsePRJ", "Parse .prj file",
+          : base("Parse a PRJ file", "ParsePRJ",
               "Parse a projection file for in grasshopper projections",
               "Earthworm", "Utilities")
         {
