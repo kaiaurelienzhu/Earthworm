@@ -162,8 +162,7 @@ namespace Earthworm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // This code just copies each shapefile
-
+            // Iterate through each shapefile
             foreach (CropProperties property in _properties)
             {
                 // Get original shapefile and reproject to WGS84
@@ -211,68 +210,9 @@ namespace Earthworm
                     }
 
                 }
-
-
-                result.SaveAs(@"C:\Users\kai\Desktop\Kai Private Study\Programming\" + file.Name + ".shp", true);
-
+                result.Reproject(originalPrj);
+                result.SaveAs(file.FilePath + "_EW.shp", true);
             }
         }
-
-        //    private void button2_Click(object sender, EventArgs e)
-        //    {
-        //        //http://dotspatial.codeplex.com/wikipage?title=CreateAttributes&referringTitle=Desktop_SampleCode
-        //        // define the feature type for this file
-        //        FeatureSet fs = new FeatureSet(FeatureType.Polygon);
-
-
-        //        // Add Some Columns
-        //        fs.DataTable.Columns.Add(new DataColumn("ID", typeof(int)));
-        //        fs.DataTable.Columns.Add(new DataColumn("Text", typeof(string)));
-
-        //        // create a geometry (square polygon)
-        //        List<Coordinate> vertices = new List<Coordinate>();
-
-        //        vertices.Add(new Coordinate(11219035, 1542354));
-        //        vertices.Add(new Coordinate(11219035, 1542354 + 100));
-        //        vertices.Add(new Coordinate(11219035 + 100, 1542354 + 100));
-        //        vertices.Add(new Coordinate(11219035 + 100, 1542354 + 0));
-        //        Polygon geom = new Polygon(vertices);
-
-        //        fs.AddFeature(geom);
-
-        //        // add 16.01.18
-        //        // add the geometry to the featureset. 
-        //        IFeature feature = fs.AddFeature(geom);
-
-
-        //        // now the resulting features knows what columns it has
-        //        // add values for the columns
-        //        feature.DataRow.BeginEdit();
-        //        feature.DataRow["ID"] = 1;
-        //        feature.DataRow["Text"] = "Hello World";
-        //        feature.DataRow.EndEdit();
-
-
-        //        vertices.Clear();
-        //        vertices.Add(new Coordinate(11219035 + 100, 1542354));
-        //        vertices.Add(new Coordinate(11219035 + 100, 1542354 + 100));
-        //        vertices.Add(new Coordinate(11219035 + 200, 1542354 + 100));
-        //        vertices.Add(new Coordinate(11219035 + 200, 1542354 + 0));
-        //        geom = new Polygon(vertices);
-
-        //        feature = fs.AddFeature(geom);
-        //        // now the resulting features knows what columns it has
-        //        // add values for the columns
-        //        feature.DataRow.BeginEdit();
-        //        feature.DataRow["ID"] = 2;
-        //        feature.DataRow["Text"] = "Hello World";
-        //        feature.DataRow.EndEdit();
-
-
-
-        //        // save the feature set
-        //        fs.SaveAs(@"C:\Users\kai\Desktop\Kai Private Study\Programming\test.shp", true);
-        //    }
-        //}  
     }
 }
