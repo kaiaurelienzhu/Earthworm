@@ -213,7 +213,7 @@ namespace Earthworm
                 }
 
 
-                result.SaveAs(@"C:\Users\kai\Desktop\Kai Private Study\Programming\Simplified.shp", true);
+                result.SaveAs(@"C:\Users\kai\Desktop\Kai Private Study\Programming\" + file.Name + ".shp", true);
 
             }
         }
