@@ -71,12 +71,12 @@ namespace Earthworm.Components
                 // Reproject pts 
                 if (toPrj == "")
                 {
-                    helpers_Projection.DefaultProjectPts(pt, fromPrj, out x, out y);
+                    helpers_Conversions.DefaultProjectPts(pt, fromPrj, out x, out y);
                 }
 
                 else
                 {
-                    helpers_Projection.ProjectPts(pt, fromPrj, toPrj, out x, out y);
+                    helpers_Conversions.ProjectPts(pt, fromPrj, toPrj, out x, out y);
                 }
                 
                 Point3d outPt = new Point3d(x, y, 0);

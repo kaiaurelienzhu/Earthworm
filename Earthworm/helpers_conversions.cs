@@ -9,10 +9,11 @@ using DotSpatial.Data;
 using OSGeo.GDAL;
 using OSGeo.OGR;
 using OSGeo.OSR;
+using DotSpatial.Topology;
 
 namespace Earthworm
 {
-    class helpers_Projection
+    class helpers_Conversions
     {
         // This method converts latitude longitude to UTM xyz pts
         public static void LatLongDSPToUTM(double latitude, double longitude, string utmStr, out double X, out double Y)
@@ -138,5 +139,16 @@ namespace Earthworm
 
             gJSON = sb;
         }
+
+        public static bool PointInRect(Point3d pt, Rectangle3d rect)
+        {
+            PointContainment containment = rect.Contains(pt);
+            bool isIn = containment.Equals(1);
+            return isIn;
+ 
+        }
     }
+
+
+
 }

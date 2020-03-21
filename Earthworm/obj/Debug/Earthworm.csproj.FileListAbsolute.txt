@@ -104,3 +104,4 @@ C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\gdalconst_csharp.dl
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\gdal_csharp.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\ogr_csharp.dll
 C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\bin\osr_csharp.dll
+C:\Users\kai\Documents\GitHub\Earthworm-master\Earthworm\obj\Debug\Earthworm.csprojAssemblyReference.cache

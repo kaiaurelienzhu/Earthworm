@@ -140,6 +140,7 @@
     <Compile Include="Components\ghc_ParseGeoJSON.cs" />
     <Compile Include="Components\ghc_ParsePRJ.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
+    <Compile Include="Components\ghc_PointInRec.cs" />
     <Compile Include="Components\ghc_Reproject.cs" />
     <Compile Include="form_mapBrowser.cs">
       <SubType>Form</SubType>
@@ -148,7 +149,7 @@
       <DependentUpon>form_mapBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="GdalConfiguration.cs" />
-    <Compile Include="helpers_Projection.cs" />
+    <Compile Include="helpers_Conversions.cs" />
     <Compile Include="helpers_UI.cs" />
     <Compile Include="EarthwormInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

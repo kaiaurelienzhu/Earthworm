@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DotSpatial.Data;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
@@ -33,16 +34,18 @@ namespace Earthworm
         private PointLatLng _maxExtent;
         private PointLatLng _minCrop;
         private PointLatLng _maxCrop;
-        public List<PointLatLng> _uiCrop;
+        private List<PointLatLng> _uiCrop;
+        public Shapefile _shp;
 
 
-        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop)
+        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop, Shapefile shp)
         {
             _minExtent = minExtent;
             _maxExtent = maxExtent;
             _minCrop = minCrop;
             _maxCrop = maxCrop;
             _uiCrop = uiCrop;
+            _shp = shp;
         }
 
 
@@ -110,10 +113,16 @@ namespace Earthworm
                 _uiCrop = value;
             }
         }
+        public Shapefile shp
+        {
+            get
+            {
+                return _shp;
+            }
 
+
+        }
 
     }
 
-
-
-}
+    }

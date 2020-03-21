@@ -106,6 +106,7 @@ namespace Earthworm.Components
                     double centreLng = shp.Extent.Center.X;
                     double centreLat = shp.Extent.Center.Y;
 
+                    
 
 
                     // Reference inputs must be valid lat long
@@ -115,8 +116,8 @@ namespace Earthworm.Components
                     var maxCropLat = NE[0];
 
                     // Convert shp XY vals to Lat Lng and pass into Form properties
-                    helpers_Projection.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
-                    helpers_Projection.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
+                    helpers_Conversions.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
+                    helpers_Conversions.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
 
                     PointLatLng minExtent = new PointLatLng(minLat, minLng);
                     PointLatLng maxExtent = new PointLatLng(maxLat, maxLng);
@@ -125,8 +126,11 @@ namespace Earthworm.Components
                     List<PointLatLng> uiCrop = new List<PointLatLng>();
 
                     // Create crop properties
-                    CropProperties crop = new CropProperties(minExtent, maxExtent, minCrop, maxCrop, uiCrop);
+                    CropProperties crop = new CropProperties(minExtent, maxExtent, minCrop, maxCrop, uiCrop, shp);
                     properties.Add(crop);
+
+                    
+
                 }
 
                 // Display form

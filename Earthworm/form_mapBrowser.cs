@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using DotSpatial.Data;
+using DotSpatial.Topology;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
@@ -155,6 +156,41 @@ namespace Earthworm
                     uiOverlay.Polygons.Add(cropB);
 
                 }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // REFACTOR THIS CODE!!!
+
+            foreach (CropProperties property in _properties)
+            {
+                Shapefile file = property.shp;
+                List<int> featureList = new List<int>();
+                Extent extent = new Extent();
+                extent.SetValues(0, 0, 1, 1);
+
+                List<int> removeList = new List<int>();
+                int count = file.Features.Count - 1;
+
+                foreach (Feature f in file.Features)
+                {
+                    // Iterate through coords in list
+                    IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
+                    foreach (DotSpatial.Topology.Coordinate coord in coords)
+                    {
+
+                    }
+
+                }
+
+                for (int index = 0; index < (file.Features.Count); index++)
+                {
+                    file.Features.RemoveAt(index);
+                }
+
+                file.SaveAs("C:\\Users\\kai\\Desktop\\Kai Private Study\\Programming\\" + file.Name.ToString() + ".shp", true);
+
             }
         }
     }  

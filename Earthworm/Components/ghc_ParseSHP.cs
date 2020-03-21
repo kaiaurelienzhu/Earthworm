@@ -84,7 +84,7 @@ namespace Earthworm.Components
             string prjStr = shp.ProjectionString;
             string prj = shp.Projection.ToString();
 
-
+            
 
 
             //Read features in the shapefile 
