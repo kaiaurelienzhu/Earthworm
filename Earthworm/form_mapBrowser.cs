@@ -166,21 +166,50 @@ namespace Earthworm
 
             foreach (CropProperties property in _properties)
             {
+                // Get original shapefile and reproject to WGS84
                 Shapefile file = property.shp;
-                FeatureSet result = new FeatureSet(FeatureType.Polygon);
-                result.Projection = ProjectionInfo.FromProj4String(KnownCoordinateSystems.Geographic.World.WGS1984.ToProj4String());
-                Extent extent = new Extent();
-                extent.SetValues(property.minCrop.Lat, property.minCrop.Lng, property.maxCrop.Lat, property.maxCrop.Lng);
-                result.CopyTableSchema(file);
+                ProjectionInfo originalPrj = file.Projection;
+                ProjectionInfo WGS84 = ProjectionInfo.FromProj4String(KnownCoordinateSystems.Geographic.World.WGS1984.ToProj4String());
+                file.Reproject(WGS84);
 
+                // Create new shapefile & set projection
+                FeatureSet result = new FeatureSet(FeatureType.Polygon);
+                result.Projection = file.Projection;
+
+                // Set new extent
+                Extent extent = new Extent();
+                extent.SetValues(property.minCrop.Lng, property.minCrop.Lat, property.maxCrop.Lng, property.maxCrop.Lat);
+                result.CopyTableSchema(file);
+                
                 foreach (Feature f in file.Features)
                 {
+
                     Shape shp = f.ToShape();
                     IGeometry geom = shp.ToGeometry();
                     IList<Coordinate> coords = geom.Coordinates;
-                    // Iterate through coords in list
-                    Polygon poly = new Polygon(coords);
-                    result.AddFeature(poly).CopyAttributes(f);
+                    int hit = 0;
+                    foreach (Coordinate coord in coords)
+                    {
+                        if (extent.Contains(coord))
+                        {
+                            hit++;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    if (hit != 0)
+                    {
+                        // Iterate through coords in list
+                        Polygon poly = new Polygon(coords);
+                        result.AddFeature(poly).CopyAttributes(f);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
                 }
 
 
