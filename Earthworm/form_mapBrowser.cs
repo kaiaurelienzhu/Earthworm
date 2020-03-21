@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DotSpatial.Data;
+using DotSpatial.Projections;
 using DotSpatial.Topology;
 using GMap.NET;
 using GMap.NET.MapProviders;
@@ -161,37 +162,88 @@ namespace Earthworm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // REFACTOR THIS CODE!!!
+            // This code just copies each shapefile
 
             foreach (CropProperties property in _properties)
             {
                 Shapefile file = property.shp;
-                List<int> featureList = new List<int>();
+                FeatureSet result = new FeatureSet(FeatureType.Polygon);
+                result.Projection = ProjectionInfo.FromProj4String(KnownCoordinateSystems.Geographic.World.WGS1984.ToProj4String());
                 Extent extent = new Extent();
-                extent.SetValues(0, 0, 1, 1);
-
-                List<int> removeList = new List<int>();
-                int count = file.Features.Count - 1;
+                extent.SetValues(property.minCrop.Lat, property.minCrop.Lng, property.maxCrop.Lat, property.maxCrop.Lng);
+                result.CopyTableSchema(file);
 
                 foreach (Feature f in file.Features)
                 {
+                    Shape shp = f.ToShape();
+                    IGeometry geom = shp.ToGeometry();
+                    IList<Coordinate> coords = geom.Coordinates;
                     // Iterate through coords in list
-                    IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
-                    foreach (DotSpatial.Topology.Coordinate coord in coords)
-                    {
-
-                    }
-
+                    Polygon poly = new Polygon(coords);
+                    result.AddFeature(poly).CopyAttributes(f);
                 }
 
-                for (int index = 0; index < (file.Features.Count); index++)
-                {
-                    file.Features.RemoveAt(index);
-                }
 
-                file.SaveAs("C:\\Users\\kai\\Desktop\\Kai Private Study\\Programming\\" + file.Name.ToString() + ".shp", true);
+                result.SaveAs(@"C:\Users\kai\Desktop\Kai Private Study\Programming\Simplified.shp", true);
 
             }
         }
-    }  
+
+        //    private void button2_Click(object sender, EventArgs e)
+        //    {
+        //        //http://dotspatial.codeplex.com/wikipage?title=CreateAttributes&referringTitle=Desktop_SampleCode
+        //        // define the feature type for this file
+        //        FeatureSet fs = new FeatureSet(FeatureType.Polygon);
+
+
+        //        // Add Some Columns
+        //        fs.DataTable.Columns.Add(new DataColumn("ID", typeof(int)));
+        //        fs.DataTable.Columns.Add(new DataColumn("Text", typeof(string)));
+
+        //        // create a geometry (square polygon)
+        //        List<Coordinate> vertices = new List<Coordinate>();
+
+        //        vertices.Add(new Coordinate(11219035, 1542354));
+        //        vertices.Add(new Coordinate(11219035, 1542354 + 100));
+        //        vertices.Add(new Coordinate(11219035 + 100, 1542354 + 100));
+        //        vertices.Add(new Coordinate(11219035 + 100, 1542354 + 0));
+        //        Polygon geom = new Polygon(vertices);
+
+        //        fs.AddFeature(geom);
+
+        //        // add 16.01.18
+        //        // add the geometry to the featureset. 
+        //        IFeature feature = fs.AddFeature(geom);
+
+
+        //        // now the resulting features knows what columns it has
+        //        // add values for the columns
+        //        feature.DataRow.BeginEdit();
+        //        feature.DataRow["ID"] = 1;
+        //        feature.DataRow["Text"] = "Hello World";
+        //        feature.DataRow.EndEdit();
+
+
+        //        vertices.Clear();
+        //        vertices.Add(new Coordinate(11219035 + 100, 1542354));
+        //        vertices.Add(new Coordinate(11219035 + 100, 1542354 + 100));
+        //        vertices.Add(new Coordinate(11219035 + 200, 1542354 + 100));
+        //        vertices.Add(new Coordinate(11219035 + 200, 1542354 + 0));
+        //        geom = new Polygon(vertices);
+
+        //        feature = fs.AddFeature(geom);
+        //        // now the resulting features knows what columns it has
+        //        // add values for the columns
+        //        feature.DataRow.BeginEdit();
+        //        feature.DataRow["ID"] = 2;
+        //        feature.DataRow["Text"] = "Hello World";
+        //        feature.DataRow.EndEdit();
+
+
+
+        //        // save the feature set
+        //        fs.SaveAs(@"C:\Users\kai\Desktop\Kai Private Study\Programming\test.shp", true);
+        //    }
+        //}  
+    }
 }
