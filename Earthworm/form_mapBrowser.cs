@@ -87,6 +87,7 @@ namespace Earthworm
                 cropPts.Add(new PointLatLng(firstCrop.minCrop.Lat, firstCrop.maxCrop.Lng));
 
 
+
                 // ADD POLYGON TO MAP
                 GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
                 crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
@@ -108,6 +109,12 @@ namespace Earthworm
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // Reset crop in all shapefiles
+            foreach (CropProperties props in _properties)
+            {
+                props.maxCrop = new PointLatLng(0, 0);
+                props.minCrop = new PointLatLng(0, 0);
+            }
             uiOverlay.Clear();
             cropOverlay.Clear();
         }
@@ -115,7 +122,6 @@ namespace Earthworm
         private void gmap_MouseClick(object sender, MouseEventArgs e)
         {
             // Setup map overlay
-
             CropProperties crop = _properties[0];
             List<PointLatLng> pts = crop.uiCrop;
 
@@ -125,7 +131,6 @@ namespace Earthworm
             {
                 PointLatLng pt = gmap.FromLocalToLatLng(e.X, e.Y);
                 pts.Add(pt);
-
 
                 if (pts.Count > 2)
                 {
@@ -137,6 +142,17 @@ namespace Earthworm
                 // Add a bounding box to map
                 if (crop.uiCrop.Count == 2)
                 {
+                    // Reorder pts to ensure correct bottom left and top right
+                    if (pts[0].Lat > pts[1].Lat && pts[0].Lng > pts[1].Lng)
+                    {
+                        PointLatLng temp0 = pts[0];
+                        PointLatLng temp1 = pts[1];
+                        pts.Clear();
+                        pts.Add(temp1);
+                        pts.Add(temp0);
+                    }
+
+
                     uiOverlay.Clear();
                     List<PointLatLng> finalPts = new List<PointLatLng>();
 
@@ -155,6 +171,13 @@ namespace Earthworm
                     cropB.Stroke = new Pen(Color.Red, 2);
                     gmap.Overlays.Add(uiOverlay);
                     uiOverlay.Polygons.Add(cropB);
+
+                    foreach (CropProperties cropBoundary in _properties)
+                    {
+                        
+                        cropBoundary.minCrop = pt0;
+                        cropBoundary.maxCrop = pt2;
+                    }
 
                 }
             }
@@ -175,14 +198,19 @@ namespace Earthworm
                 FeatureSet result = new FeatureSet(FeatureType.Polygon);
                 result.Projection = file.Projection;
 
+
+
+
                 // Set new extent
                 Extent extent = new Extent();
                 extent.SetValues(property.minCrop.Lng, property.minCrop.Lat, property.maxCrop.Lng, property.maxCrop.Lat);
+
+
                 result.CopyTableSchema(file);
                 
                 foreach (Feature f in file.Features)
                 {
-
+                    // Test to see if coord is within extent
                     Shape shp = f.ToShape();
                     IGeometry geom = shp.ToGeometry();
                     IList<Coordinate> coords = geom.Coordinates;
@@ -212,6 +240,7 @@ namespace Earthworm
                 }
                 result.Reproject(originalPrj);
                 result.SaveAs(file.FilePath + "_EW.shp", true);
+                this.Close();
             }
         }
     }
