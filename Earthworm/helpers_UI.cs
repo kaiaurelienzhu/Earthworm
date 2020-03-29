@@ -23,7 +23,7 @@ namespace Earthworm
             form_mapBrowser form = new form_mapBrowser(properties);
             Grasshopper.GUI.GH_WindowsFormUtil.CenterFormOnCursor(form, true);
             form.ShowDialog();
-            //form.Show();
+            
         }
     }
 

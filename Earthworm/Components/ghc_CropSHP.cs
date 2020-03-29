@@ -1,6 +1,7 @@
 ﻿using DotSpatial.Data;
 using GMap.NET;
 using Grasshopper.Kernel;
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 
@@ -49,6 +50,7 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            pManager.AddPointParameter("Crop extents", "Pts", "Max and min points to WGS84", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -106,14 +108,22 @@ namespace Earthworm.Components
                     double centreLng = shp.Extent.Center.X;
                     double centreLat = shp.Extent.Center.Y;
 
-                    
+                    // Reorder pts to ensure max and min are valid inputs
+                    List<double> Lats = new List<double>();
+                    List<double> Lngs = new List<double>();
 
+                    Lats.Add(SW[0]);
+                    Lats.Add(NE[0]);
 
-                    // Reference inputs must be valid lat long
-                    var minCropLng = SW[1];
-                    var minCropLat = SW[0];
-                    var maxCropLng = NE[1];
-                    var maxCropLat = NE[0];
+                    Lngs.Add(SW[1]);
+                    Lngs.Add(NE[1]);
+
+                    Lats.Sort();
+                    Lngs.Sort();
+
+                    PointLatLng minLatLng = new PointLatLng(Lats[0], Lngs[0]);
+                    PointLatLng maxLatLng = new PointLatLng(Lats[1], Lngs[1]);
+
 
                     // Convert shp XY vals to Lat Lng and pass into Form properties
                     helpers_Conversions.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
@@ -121,13 +131,13 @@ namespace Earthworm.Components
 
                     PointLatLng minExtent = new PointLatLng(minLat, minLng);
                     PointLatLng maxExtent = new PointLatLng(maxLat, maxLng);
-                    PointLatLng minCrop = new PointLatLng(minCropLat, minCropLng);
-                    PointLatLng maxCrop = new PointLatLng(maxCropLat, maxCropLng);
                     List<PointLatLng> uiCrop = new List<PointLatLng>();
 
                     // Create crop properties
-                    CropProperties crop = new CropProperties(minExtent, maxExtent, minCrop, maxCrop, uiCrop, shp);
+                    CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp);
                     properties.Add(crop);
+
+
 
                     
 
@@ -135,6 +145,20 @@ namespace Earthworm.Components
 
                 // Display form
                 helpers_UI.DisplayForm(properties);
+
+
+                // Set output 
+                CropProperties mainCrop = properties[0];
+                List<Point3d> extents = new List<Point3d>();
+                Point3d min = new Point3d(mainCrop.minCrop.Lng, mainCrop.minCrop.Lat, 0);
+                Point3d max = new Point3d(mainCrop.maxCrop.Lng, mainCrop.maxCrop.Lat, 0);
+                extents.Add(min);
+                extents.Add(max);
+
+                DA.SetDataList(0, extents);
+
+
+
             }
 
         }
