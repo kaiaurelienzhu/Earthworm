@@ -142,17 +142,27 @@ namespace Earthworm
                 // Add a bounding box to map
                 if (crop.uiCrop.Count == 2)
                 {
-                    // Reorder pts to ensure correct bottom left and top right
-                    if (pts[0].Lat > pts[1].Lat && pts[0].Lng > pts[1].Lng)
-                    {
-                        PointLatLng temp0 = pts[0];
-                        PointLatLng temp1 = pts[1];
-                        pts.Clear();
-                        pts.Add(temp1);
-                        pts.Add(temp0);
-                    }
+                    // Reorder pts to ensure max and min are correct.
+                    List<double> Lats = new List<double>();
+                    List<double> Lngs = new List<double>();
+
+                    Lats.Add(pts[0].Lat);
+                    Lats.Add(pts[1].Lat);
+                    Lngs.Add(pts[0].Lng);
+                    Lngs.Add(pts[1].Lng);
+
+                    Lats.Sort();
+                    Lngs.Sort();
+
+                    PointLatLng min = new PointLatLng(Lats[0], Lngs[0]);
+                    PointLatLng max = new PointLatLng(Lats[1], Lngs[1]);
+
+                    pts.Clear();
+                    pts.Add(min);
+                    pts.Add(max);
 
 
+                    // Clear the overlay and create rectangle polygon 
                     uiOverlay.Clear();
                     List<PointLatLng> finalPts = new List<PointLatLng>();
 
@@ -166,12 +176,14 @@ namespace Earthworm
                     finalPts.Add(pt2);
                     finalPts.Add(pt3);
 
+                    // Render the polygon
                     GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
                     cropB.Fill = new SolidBrush(Color.FromArgb(20, Color.White));
                     cropB.Stroke = new Pen(Color.Red, 2);
                     gmap.Overlays.Add(uiOverlay);
                     uiOverlay.Polygons.Add(cropB);
 
+                    // Set the crop boundary max and min
                     foreach (CropProperties cropBoundary in _properties)
                     {
                         
