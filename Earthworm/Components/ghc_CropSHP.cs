@@ -35,11 +35,11 @@ namespace Earthworm.Components
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("South West Point", "SW", "South West extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("Min Pt", "Pt1", "South West extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("North East Point", "NE", "North East extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("Max Pt", "Pt2", "North East extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
 
@@ -73,23 +73,22 @@ namespace Earthworm.Components
 
 
             // Setup default inputs
-            List<double> SW = new List<double>();
-            DA.GetDataList(2, SW);
-            if (SW.Count == 0)
+            List<double> Pt1 = new List<double>();
+            DA.GetDataList(2, Pt1);
+            if (Pt1.Count == 0)
             {
-                SW.Add(0);
-                SW.Add(0);
+                Pt1.Add(0);
+                Pt1.Add(0);
             }
 
-            List<double> NE = new List<double>();
-            DA.GetDataList(3, NE);
-            if (NE.Count == 0)
+            List<double> Pt2 = new List<double>();
+            DA.GetDataList(3, Pt2);
+            if (Pt2.Count == 0)
             {
-                NE.Add(0);
-                NE.Add(0);
+                Pt2.Add(0);
+                Pt2.Add(0);
             }
 
-            // Iterate through shapefile
 
             foreach (string path in paths)
             {
@@ -112,11 +111,11 @@ namespace Earthworm.Components
                 List<double> Lats = new List<double>();
                 List<double> Lngs = new List<double>();
 
-                Lats.Add(SW[0]);
-                Lats.Add(NE[0]);
+                Lats.Add(Pt1[0]);
+                Lats.Add(Pt2[0]);
 
-                Lngs.Add(SW[1]);
-                Lngs.Add(NE[1]);
+                Lngs.Add(Pt1[1]);
+                Lngs.Add(Pt2[1]);
 
                 Lats.Sort();
                 Lngs.Sort();
@@ -135,7 +134,14 @@ namespace Earthworm.Components
 
                 // Create crop properties
                 CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp);
-                properties.Add(crop);
+
+
+                // Limit properties added to persistent data
+                if (properties.Count < paths.Count)
+                {
+                    properties.Add(crop);
+                }
+
 
             }
 
