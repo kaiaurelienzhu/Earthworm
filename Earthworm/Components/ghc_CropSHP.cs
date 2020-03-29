@@ -13,8 +13,8 @@ namespace Earthworm.Components
         /// Initializes a new instance of the ghc_CropSHP class.
         /// </summary>
         public ghc_CropSHP()
-          : base("Crop Shapefile", "CropSHP",
-              "Crop a shapefile",
+          : base("Crop Shapefiles", "CropSHP",
+              "Batch crop a list of shapefiles based off UI input or coordinates",
               "Earthworm", "Utilities")
         {
         }
@@ -50,7 +50,8 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddPointParameter("Crop extents", "Pts", "Max and min points to WGS84", GH_ParamAccess.list);
+            pManager.AddPointParameter("North East point", "MaxPt", "Max point in WGS84 coordinates", GH_ParamAccess.item);
+            pManager.AddPointParameter("South West point", "MinPt", "Min point in WGS84 coordinates", GH_ParamAccess.item); ;
         }
 
 
@@ -169,7 +170,8 @@ namespace Earthworm.Components
             extents.Clear();
             extents.Add(newmin);
             extents.Add(newmax);
-            DA.SetDataList(0, extents);
+            DA.SetData(0, extents[0]);
+            DA.SetData(1, extents[1]);
         }
 
 

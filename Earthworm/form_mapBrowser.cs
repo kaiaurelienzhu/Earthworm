@@ -135,6 +135,7 @@ namespace Earthworm
                 if (pts.Count > 2)
                 {
                     pts.Clear();
+                    cropOverlay.Clear();
                     uiOverlay.Clear();
                     pts.Add(pt);
                 }
@@ -142,6 +143,8 @@ namespace Earthworm
                 // Add a bounding box to map
                 if (crop.uiCrop.Count == 2)
                 {
+                    cropOverlay.Clear();
+                    uiOverlay.Clear();
                     // Reorder pts to ensure max and min are correct.
                     List<double> Lats = new List<double>();
                     List<double> Lngs = new List<double>();
@@ -178,7 +181,7 @@ namespace Earthworm
 
                     // Render the polygon
                     GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
-                    cropB.Fill = new SolidBrush(Color.FromArgb(20, Color.White));
+                    cropB.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
                     cropB.Stroke = new Pen(Color.Red, 2);
                     gmap.Overlays.Add(uiOverlay);
                     uiOverlay.Polygons.Add(cropB);
