@@ -53,6 +53,11 @@ namespace Earthworm.Components
             pManager.AddPointParameter("Crop extents", "Pts", "Max and min points to WGS84", GH_ParamAccess.list);
         }
 
+
+        // Setup persistent data
+        List<Point3d> extents = new List<Point3d>();
+        List<CropProperties> properties = new List<CropProperties>();
+
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -84,83 +89,81 @@ namespace Earthworm.Components
                 NE.Add(0);
             }
 
+            // Iterate through shapefile
 
-            if (runIt)
-
+            foreach (string path in paths)
             {
-
-                List<CropProperties> properties = new List<CropProperties>();
-
-                foreach (string path in paths)
-                {
-                    // Open shapefile from path
-                    Shapefile shp = Shapefile.OpenFile(path);
-                    string prjStr = shp.ProjectionString;
+                // Open shapefile from path
+                Shapefile shp = Shapefile.OpenFile(path);
+                string prjStr = shp.ProjectionString;
 
 
-                    // Find extents & centre of shapefile
-                    double minLng = shp.Extent.MinX;
-                    double minLat = shp.Extent.MinY;
+                // Find extents & centre of shapefile
+                double minLng = shp.Extent.MinX;
+                double minLat = shp.Extent.MinY;
 
-                    double maxLng = shp.Extent.MaxX;
-                    double maxLat = shp.Extent.MaxY;
+                double maxLng = shp.Extent.MaxX;
+                double maxLat = shp.Extent.MaxY;
 
-                    double centreLng = shp.Extent.Center.X;
-                    double centreLat = shp.Extent.Center.Y;
+                double centreLng = shp.Extent.Center.X;
+                double centreLat = shp.Extent.Center.Y;
 
-                    // Reorder pts to ensure max and min are valid inputs
-                    List<double> Lats = new List<double>();
-                    List<double> Lngs = new List<double>();
+                // Reorder pts to ensure max and min are valid inputs
+                List<double> Lats = new List<double>();
+                List<double> Lngs = new List<double>();
 
-                    Lats.Add(SW[0]);
-                    Lats.Add(NE[0]);
+                Lats.Add(SW[0]);
+                Lats.Add(NE[0]);
 
-                    Lngs.Add(SW[1]);
-                    Lngs.Add(NE[1]);
+                Lngs.Add(SW[1]);
+                Lngs.Add(NE[1]);
 
-                    Lats.Sort();
-                    Lngs.Sort();
+                Lats.Sort();
+                Lngs.Sort();
 
-                    PointLatLng minLatLng = new PointLatLng(Lats[0], Lngs[0]);
-                    PointLatLng maxLatLng = new PointLatLng(Lats[1], Lngs[1]);
-
-
-                    // Convert shp XY vals to Lat Lng and pass into Form properties
-                    helpers_Conversions.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
-                    helpers_Conversions.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
-
-                    PointLatLng minExtent = new PointLatLng(minLat, minLng);
-                    PointLatLng maxExtent = new PointLatLng(maxLat, maxLng);
-                    List<PointLatLng> uiCrop = new List<PointLatLng>();
-
-                    // Create crop properties
-                    CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp);
-                    properties.Add(crop);
+                PointLatLng minLatLng = new PointLatLng(Lats[0], Lngs[0]);
+                PointLatLng maxLatLng = new PointLatLng(Lats[1], Lngs[1]);
 
 
+                // Convert shp XY vals to Lat Lng and pass into Form properties
+                helpers_Conversions.UTMToLatLongDSP(shp.Extent.MinX, shp.Extent.MinY, prjStr, out minLat, out minLng);
+                helpers_Conversions.UTMToLatLongDSP(shp.Extent.MaxX, shp.Extent.MaxY, prjStr, out maxLat, out maxLng);
 
-                    
+                PointLatLng minExtent = new PointLatLng(minLat, minLng);
+                PointLatLng maxExtent = new PointLatLng(maxLat, maxLng);
+                List<PointLatLng> uiCrop = new List<PointLatLng>();
 
-                }
+                // Create crop properties
+                CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp);
+                properties.Add(crop);
 
-                // Display form
-                helpers_UI.DisplayForm(properties);
+            }
 
-
-                // Set output 
-                CropProperties mainCrop = properties[0];
-                List<Point3d> extents = new List<Point3d>();
+            CropProperties mainCrop = properties[0];
+            if (extents.Count != 2)
+            {
                 Point3d min = new Point3d(mainCrop.minCrop.Lng, mainCrop.minCrop.Lat, 0);
                 Point3d max = new Point3d(mainCrop.maxCrop.Lng, mainCrop.maxCrop.Lat, 0);
                 extents.Add(min);
                 extents.Add(max);
+            }
 
-                DA.SetDataList(0, extents);
-
-
+            // Button press show data
+            if (runIt)
+            {
+                // Display form
+                helpers_UI.DisplayForm(properties);
 
             }
 
+
+            // Set output 
+            Point3d newmin = new Point3d(mainCrop.minCrop.Lng, mainCrop.minCrop.Lat, 0);
+            Point3d newmax = new Point3d(mainCrop.maxCrop.Lng, mainCrop.maxCrop.Lat, 0);
+            extents.Clear();
+            extents.Add(newmin);
+            extents.Add(newmax);
+            DA.SetDataList(0, extents);
         }
 
 

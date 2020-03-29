@@ -250,10 +250,16 @@ namespace Earthworm
                     }
 
                 }
+                // Project pts back to original and save
                 result.Reproject(originalPrj);
                 result.SaveAs(file.FilePath + "_EW.shp", true);
                 this.Close();
             }
+        }
+
+        private void form_mapBrowser_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

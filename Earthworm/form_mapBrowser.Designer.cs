@@ -108,6 +108,7 @@
             this.Name = "form_mapBrowser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Earthworm Viewer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form_mapBrowser_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
