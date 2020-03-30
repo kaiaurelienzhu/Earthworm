@@ -91,7 +91,7 @@ namespace Earthworm.Components
                 Pt2.Add(0);
             }
 
-
+            // Iterate through shapefiles
             foreach (string path in paths)
             {
                 // Open shapefile from path
@@ -144,9 +144,9 @@ namespace Earthworm.Components
                     properties.Add(crop);
                 }
 
-
             }
 
+            // Define extents
             CropProperties mainCrop = properties[0];
             if (extents.Count != 2)
             {
