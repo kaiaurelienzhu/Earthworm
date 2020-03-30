@@ -16,7 +16,7 @@ namespace Earthworm.Components
         public ghc_CropSHP()
           : base("Crop Shapefiles", "CropSHP",
               "Batch crop a list of shapefiles based off UI input or coordinates",
-              "Earthworm", "Utilities")
+              "Earthworm", "Util")
         {
         }
 

@@ -16,7 +16,7 @@ namespace Earthworm.Components
         public ghc_Reproject()
           : base("Reproject pts", "Reproject",
               "Reprojects features from one coordinate system to another",
-              "Earthworm", "Utilities")
+              "Earthworm", "Util")
         {
         }
 

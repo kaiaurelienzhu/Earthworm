@@ -15,7 +15,7 @@ namespace Earthworm.Components
         public ghc_LatLong()
           : base("Point to Latitude Longitude", "ToLatLong",
               "Converts xyz point to latitude longintude",
-              "Earthworm", "Utilities")
+              "Earthworm", "Util")
         {
         }
 

@@ -140,13 +140,6 @@ namespace Earthworm
             gJSON = sb;
         }
 
-        public static bool PointInRect(Point3d pt, Rectangle3d rect)
-        {
-            PointContainment containment = rect.Contains(pt);
-            bool isIn = containment.Equals(1);
-            return isIn;
- 
-        }
     }
 
 
