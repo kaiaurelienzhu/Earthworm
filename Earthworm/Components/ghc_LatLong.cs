@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
+using Earthworm.Properties;
 
 namespace Earthworm.Components
 {
@@ -12,8 +13,8 @@ namespace Earthworm.Components
         /// Initializes a new instance of the ghc_LatLong class.
         /// </summary>
         public ghc_LatLong()
-          : base("XYZ to Latitude Longitude", "ToLatLong",
-              "Converts xyz to lat long",
+          : base("Point to Latitude Longitude", "ToLatLong",
+              "Converts xyz point to latitude longintude",
               "Earthworm", "Utilities")
         {
         }
@@ -69,7 +70,7 @@ namespace Earthworm.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.LatLong_24x24;
             }
         }
 

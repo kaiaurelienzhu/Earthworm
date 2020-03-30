@@ -28,7 +28,7 @@ namespace Earthworm.Components
         public ghc_ParseSHP()
           : base("Parse Shapefile", "ParseSHP",
               "Parses a shapefile into the Grasshopper environment",
-              "Earthworm", "Utilities")
+              "Earthworm", "Data")
         {
         }
 

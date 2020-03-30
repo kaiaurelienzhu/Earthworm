@@ -16,7 +16,7 @@ namespace Earthworm.Components
         public ghc_ParsePRJ()
           : base("Parse a PRJ file", "ParsePRJ",
               "Parse a projection file for in grasshopper projections",
-              "Earthworm", "Utilities")
+              "Earthworm", "Data")
         {
         }
 

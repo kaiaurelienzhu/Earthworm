@@ -4,6 +4,7 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using Earthworm.Properties;
 
 namespace Earthworm.Components
 {
@@ -185,7 +186,7 @@ namespace Earthworm.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.Earthworm;
             }
         }
 

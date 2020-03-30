@@ -140,7 +140,6 @@
     <Compile Include="Components\ghc_ParseGeoJSON.cs" />
     <Compile Include="Components\ghc_ParsePRJ.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
-    <Compile Include="Components\ghc_PointInRec.cs" />
     <Compile Include="Components\ghc_Reproject.cs" />
     <Compile Include="form_mapBrowser.cs">
       <SubType>Form</SubType>
@@ -163,9 +162,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="form_mapBrowser.resx">
       <DependentUpon>form_mapBrowser.cs</DependentUpon>
@@ -177,6 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GdalConfiguration.vb" />
+    <None Include="Resources\LatLong_24x24.png" />
+    <None Include="Resources\Earthworm.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
