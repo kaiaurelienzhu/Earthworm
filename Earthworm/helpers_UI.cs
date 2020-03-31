@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,20 @@ namespace Earthworm
             form.ShowDialog();
             
         }
+
+        public static Color RandomColor()
+        {
+            System.Random rdm = new Random();
+            int red = rdm.Next(0, 255);
+            int green = rdm.Next(0, 255);
+            int blue = rdm.Next(0, 255);
+
+            return Color.FromArgb(80, red, green, blue);
+        }
+
+
     }
+
 
     // Create properties which must be met for each shapefile
     public class CropProperties

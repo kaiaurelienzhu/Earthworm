@@ -32,7 +32,8 @@ namespace Earthworm
             InitializeComponent();
 
         }
-        GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
+
+        // Setup overlays
         GMapOverlay cropOverlay = new GMapOverlay("Crop overlay");
         GMapOverlay uiOverlay = new GMapOverlay("UI overlay");
         private void gMapControl1_Load(object sender, EventArgs e)
@@ -41,16 +42,19 @@ namespace Earthworm
             gmap.MapProvider = GMapProviders.GoogleHybridMap;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
 
+            // Setup base single ui crop
             List<PointLatLng> uiCropPts = _properties[0].uiCrop;
-
+            GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
+            // Iterate over each shapefile
             foreach (CropProperties property in _properties)
             {
+
                 gmap.Position = property.maxExtent;
                 gmap.MinZoom = 1;
                 gmap.MaxZoom = 24;
                 gmap.Zoom = 10;
                 gmap.ShowCenter = false;
-
+                Color c = helpers_UI.RandomColor();
 
                 // Initialize shapefile boundaries
                 List<PointLatLng> points = new List<PointLatLng>();
@@ -63,11 +67,12 @@ namespace Earthworm
 
                 // Creates polygons
                 GMapPolygon polygon = new GMapPolygon(points, "Extents");
-                polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Orange));
-                polygon.Stroke = new Pen(Color.Orange, 1);
+                polygon.Fill = new SolidBrush(c);
+                polygon.Stroke = new Pen(c, 2);
+                //polygon.Fill = new SolidBrush(Color.FromArgb(80, Color.Orange));
+                //polygon.Stroke = new Pen(Color.Orange, 2);
                 extentOverlay.Polygons.Add(polygon);
                 gmap.Overlays.Add(extentOverlay);
-
 
             }
 
@@ -89,6 +94,7 @@ namespace Earthworm
 
 
                 // ADD POLYGON TO MAP
+                var rand = new Random();
                 GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
                 crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
                 crop.Stroke = new Pen(Color.Red, 2);
