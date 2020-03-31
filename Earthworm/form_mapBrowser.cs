@@ -44,7 +44,7 @@ namespace Earthworm
 
             // Setup base single ui crop
             List<PointLatLng> uiCropPts = _properties[0].uiCrop;
-            GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
+
             // Iterate over each shapefile
             foreach (CropProperties property in _properties)
             {
@@ -66,6 +66,7 @@ namespace Earthworm
                 points.Add(new PointLatLng(property.minExtent.Lat, property.maxExtent.Lng));
 
                 // Creates polygons
+                GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
                 GMapPolygon polygon = new GMapPolygon(points, "Extents");
                 polygon.Fill = new SolidBrush(c);
                 polygon.Stroke = new Pen(c, 2);
