@@ -263,7 +263,7 @@ namespace Earthworm
                 }
                 // Project pts back to original and save
                 result.Reproject(originalPrj);
-                result.SaveAs(file.FilePath + "_EW.shp", true);
+                result.SaveAs(property.path + ".shp", true);
                 this.Close();
             }
         }

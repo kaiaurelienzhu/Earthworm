@@ -50,9 +50,10 @@ namespace Earthworm
         private PointLatLng _maxCrop;
         private List<PointLatLng> _uiCrop;
         public Shapefile _shp;
+        public string _path;
 
 
-        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop, Shapefile shp)
+        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop, Shapefile shp, string path)
         {
             _minExtent = minExtent;
             _maxExtent = maxExtent;
@@ -60,6 +61,7 @@ namespace Earthworm
             _maxCrop = maxCrop;
             _uiCrop = uiCrop;
             _shp = shp;
+            _path = path;
         }
 
 
@@ -135,6 +137,19 @@ namespace Earthworm
             }
 
 
+        }
+
+        public string path
+        {
+            get
+            {
+                return _path;
+            }
+
+            set
+            {
+                _path = value;
+            }
         }
 
     }

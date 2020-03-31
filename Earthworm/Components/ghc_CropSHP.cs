@@ -32,7 +32,7 @@ namespace Earthworm.Components
             
             // Options inputs
             Params.Input[
-            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.list)
+            pManager.AddTextParameter("Path", "P", "File path of shapefile as string.", GH_ParamAccess.list)
             ].Optional = true;
 
             Params.Input[
@@ -43,6 +43,9 @@ namespace Earthworm.Components
             pManager.AddNumberParameter("Max Pt", "Pt2", "North East extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
+            Params.Input[
+            pManager.AddTextParameter("Target Path", "outPaths", "File paths of shapefiles to crop.", GH_ParamAccess.list)
+            ].Optional = true;
 
         }
 
@@ -73,6 +76,8 @@ namespace Earthworm.Components
             List<string> paths = new List<string>();
             if (!DA.GetDataList(1, paths)) return;
 
+            List<string> outPaths = new List<string>();
+            if (!DA.GetDataList(4, outPaths)) return;
 
             // Setup default inputs
             List<double> Pt1 = new List<double>();
@@ -91,13 +96,15 @@ namespace Earthworm.Components
                 Pt2.Add(0);
             }
 
+            // count index
+            int count = 0;
             // Iterate through shapefiles
             foreach (string path in paths)
             {
                 // Open shapefile from path
                 Shapefile shp = Shapefile.OpenFile(path);
                 string prjStr = shp.ProjectionString;
-
+                string outPath = outPaths[count];
 
                 // Find extents & centre of shapefile
                 double minLng = shp.Extent.MinX;
@@ -135,14 +142,16 @@ namespace Earthworm.Components
                 List<PointLatLng> uiCrop = new List<PointLatLng>();
 
                 // Create crop properties
-                CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp);
-
+                CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp, outPath);
+                count++;
 
                 // Limit properties added to persistent data
                 if (properties.Count < paths.Count)
                 {
                     properties.Add(crop);
                 }
+
+                
 
             }
 
