@@ -77,11 +77,11 @@ namespace Earthworm.Components
             if (!DA.GetDataList(1, paths)) return;
 
             List<string> outPaths = new List<string>();
-            if (!DA.GetDataList(4, outPaths)) return;
+            DA.GetDataList(4, outPaths);
 
             if (paths.Count != outPaths.Count)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Filepath counts do not match, please check your input");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Filepath counts do not match, please check your inputs");
             }
 
 
