@@ -14,7 +14,7 @@ namespace Earthworm.Components
         /// Initializes a new instance of the ghc_ParseGeoJSON class.
         /// </summary>
         public ghc_ParseGeoJSON()
-          : base("ParseGeoJSON", "ParseGJSON",
+          : base("Parse GeoJSON", "ParseGJSON",
               "Description",
               "Earthworm", "Util")
         {

@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Earthworm.Properties;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
-using DotSpatial.Data;
-using DotSpatial.Projections;
 
 namespace Earthworm.Components
 {
-    public class ghc_ParsePRJ : GH_Component
+    public class ghc_XYZ : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the ghc_ParsePRJ class.
+        /// Initializes a new instance of the ghc_XYZ class.
         /// </summary>
-        public ghc_ParsePRJ()
-          : base("Parse PRJ", "ParsePRJ",
-              "Parse a projection file for in grasshopper projections",
-              "Earthworm", "Data")
+        public ghc_XYZ()
+          : base("Lat Long to Point", "toXYZ",
+              "Description",
+              "Earthworm", "Util")
         {
         }
 
@@ -25,8 +23,9 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            // Compulsory inputs
-            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Latitude", "Lat", "Latitude value", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Longitude", "Long", "Longitude value", GH_ParamAccess.item);
+            pManager.AddTextParameter("Projection", "PrjStr", "Projection of shapefile", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -34,8 +33,7 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Projection String", "PrjStr", "The projection string of prj. Used for projections.", GH_ParamAccess.item);
-            pManager.AddTextParameter("Projection", "Prj", "Human readable projection of .prj", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point", "P", "Converted point", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -45,15 +43,21 @@ namespace Earthworm.Components
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // Setup inputs
-            string path = "";
-            if (!DA.GetData("Path", ref path)) return;
+            double lat = 0;
+            if (!DA.GetData("Latitude", ref lat)) return;
 
-            ProjectionInfo prjFile = ProjectionInfo.Open(path);
-            string prjStr = prjFile.ToProj4String();
-            string prj = prjFile.ToString();
+            double lng = 0;
+            if (!DA.GetData("Latitude", ref lng)) return;
 
-            DA.SetData(0, prjStr);
-            DA.SetData(1, prj);
+            string prj = "";
+            if (!DA.GetData("Projection", ref prj)) return;
+
+            double X;
+            double Y;
+
+            helpers_Conversions.DefaultProjectPts(new Point3d(lat, lng, 0), prj, out X, out Y);
+            Point3d pt = new Point3d(X, Y, 0);
+            DA.SetData(0, pt);
         }
 
         /// <summary>
@@ -65,7 +69,7 @@ namespace Earthworm.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.LatLong_24x24;
             }
         }
 
@@ -74,7 +78,7 @@ namespace Earthworm.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("200f792e-7d26-45b5-befe-1ab1e7e3de9b"); }
+            get { return new Guid("4f0206ed-a878-4597-aecc-85fdbcc70c2c"); }
         }
     }
 }
