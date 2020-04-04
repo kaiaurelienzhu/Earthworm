@@ -14,7 +14,7 @@ namespace Earthworm.Components
         /// Initializes a new instance of the ghc_Reproject class.
         /// </summary>
         public ghc_Reproject()
-          : base("Reproject", "Reproject",
+          : base("Reproject Features", "Reproject",
               "Reprojects features from one coordinate system to another",
               "Earthworm", "Util")
         {

@@ -164,18 +164,16 @@ namespace Earthworm
 
     public class RandomColorGenerator
     {
-
         public static Color RandomColor()
         {
 
-            Random r = new Random(DateTime.Now.Millisecond);
+            Random r = new Random(2);
             byte red = (byte)r.Next(0, 255);
             byte green = (byte)r.Next(0, 255);
             byte blue = (byte)r.Next(0, 255);
 
             Color _opacity = Color.FromArgb(80, red, green, blue);
             Color _solid = Color.FromArgb(100, red, green, blue);
-
 
             return Color.FromArgb(80, red, green, blue);
         }

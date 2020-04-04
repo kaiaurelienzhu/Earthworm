@@ -26,7 +26,7 @@ namespace Earthworm.Components
         /// new tabs/panels will automatically be created.
         /// </summary>
         public ghc_ParseSHP()
-          : base("Parse Shapefile", "ParseSHP",
+          : base("Parse SHP", "ParseSHP",
               "Parses a shapefile into the Grasshopper environment",
               "Earthworm", "Data")
         {
@@ -39,11 +39,11 @@ namespace Earthworm.Components
         {
             
             // Compulsory inputs
-            pManager.AddTextParameter("Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
+            pManager.AddTextParameter("File Path", "P", "File path or directory of shapefile as string.", GH_ParamAccess.item);
 
             // Optional inputs
             Params.Input[
-            pManager.AddVectorParameter("Vector", "V", "Option translation vector to working origin", GH_ParamAccess.item)
+            pManager.AddVectorParameter("Vector", "V", "Optional translation vector to working origin", GH_ParamAccess.item)
             ].Optional = true;
         }
 
@@ -83,9 +83,6 @@ namespace Earthworm.Components
             Shapefile shp = Shapefile.OpenFile(path);
             string prjStr = shp.ProjectionString;
             string prj = shp.Projection.ToString();
-
-            
-
 
             //Read features in the shapefile 
             int pathCount = 0;
@@ -130,9 +127,6 @@ namespace Earthworm.Components
                 // Increment path
                 pathCount++;
             }
-
-
-
 
             //Output the data
             DA.SetDataTree(0, keysTree);

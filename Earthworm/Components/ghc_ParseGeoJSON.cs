@@ -16,7 +16,7 @@ namespace Earthworm.Components
         public ghc_ParseGeoJSON()
           : base("ParseGeoJSON", "ParseGJSON",
               "Description",
-              "Earthworm", "WIP")
+              "Earthworm", "Util")
         {
         }
 

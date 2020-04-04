@@ -17,7 +17,7 @@ namespace Earthworm.Components
         public ghc_CropSHP()
           : base("Crop Shapefiles", "CropSHP",
               "Batch crop a list of shapefiles based off UI input or coordinates",
-              "Earthworm", "Util")
+              "Earthworm", "Data")
         {
         }
 
@@ -29,7 +29,7 @@ namespace Earthworm.Components
 
 
             // Compulsory inputs
-            pManager.AddBooleanParameter("Run", "R", "Press to run", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Run", "Run", "Change to True to run", GH_ParamAccess.item);
             
             // Options inputs
             Params.Input[
@@ -226,7 +226,6 @@ namespace Earthworm.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.Earthworm;
             }
         }
 
