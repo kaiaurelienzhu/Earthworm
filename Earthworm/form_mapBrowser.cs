@@ -54,7 +54,7 @@ namespace Earthworm
                 gmap.MaxZoom = 24;
                 gmap.Zoom = 10;
                 gmap.ShowCenter = false;
-                Color c = helpers_UI.RandomColor();
+
 
                 // Initialize shapefile boundaries
                 List<PointLatLng> points = new List<PointLatLng>();
@@ -65,13 +65,12 @@ namespace Earthworm
                 points.Add(property.maxExtent);
                 points.Add(new PointLatLng(property.minExtent.Lat, property.maxExtent.Lng));
 
-                // Creates polygons
+                // Creates extents and style
                 GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
                 GMapPolygon polygon = new GMapPolygon(points, "Extents");
-                polygon.Fill = new SolidBrush(c);
-                polygon.Stroke = new Pen(c, 2);
-                //polygon.Fill = new SolidBrush(Color.FromArgb(80, Color.Orange));
-                //polygon.Stroke = new Pen(Color.Orange, 2);
+                Color col = property.color;
+                polygon.Fill = new SolidBrush(Color.FromArgb(80, col.R, col.G, col.B));
+                polygon.Stroke = new Pen(Color.FromArgb(col.R, col.G, col.B), 2);
                 extentOverlay.Polygons.Add(polygon);
                 gmap.Overlays.Add(extentOverlay);
 
@@ -190,7 +189,7 @@ namespace Earthworm
                     gmap.Overlays.Remove(uiOverlay);
                     GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
                     cropB.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
-                    cropB.Stroke = new Pen(Color.Red, 2);
+                    cropB.Stroke = new Pen(Color.Red, 4);
                     gmap.Overlays.Add(uiOverlay);
                     uiOverlay.Polygons.Add(cropB);
 
@@ -269,6 +268,11 @@ namespace Earthworm
         }
 
         private void form_mapBrowser_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

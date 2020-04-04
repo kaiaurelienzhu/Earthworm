@@ -27,19 +27,7 @@ namespace Earthworm
             
         }
 
-        public static Color RandomColor()
-        {
-            System.Random rdm = new Random();
-            int red = rdm.Next(0, 255);
-            int green = rdm.Next(0, 255);
-            int blue = rdm.Next(0, 255);
-
-            return Color.FromArgb(80, red, green, blue);
-        }
-
-
     }
-
 
     // Create properties which must be met for each shapefile
     public class CropProperties
@@ -49,11 +37,12 @@ namespace Earthworm
         private PointLatLng _minCrop;
         private PointLatLng _maxCrop;
         private List<PointLatLng> _uiCrop;
-        public Shapefile _shp;
-        public string _path;
+        private Shapefile _shp;
+        private string _path;
+        private Color _color;
 
 
-        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop, Shapefile shp, string path)
+        public CropProperties(PointLatLng minExtent, PointLatLng maxExtent, PointLatLng minCrop, PointLatLng maxCrop, List<PointLatLng> uiCrop, Shapefile shp, string path, Color color)
         {
             _minExtent = minExtent;
             _maxExtent = maxExtent;
@@ -62,6 +51,7 @@ namespace Earthworm
             _uiCrop = uiCrop;
             _shp = shp;
             _path = path;
+            _color = color;
         }
 
 
@@ -129,6 +119,7 @@ namespace Earthworm
                 _uiCrop = value;
             }
         }
+
         public Shapefile shp
         {
             get
@@ -136,6 +127,10 @@ namespace Earthworm
                 return _shp;
             }
 
+            set
+            {
+                _shp = value;
+            }
 
         }
 
@@ -152,6 +147,39 @@ namespace Earthworm
             }
         }
 
-    }
+        public Color color
+        {
+            get
+            {
+                return _color;
+            }
+
+            set
+            {
+                _color = value;
+            }
+        }
 
     }
+
+    public class RandomColorGenerator
+    {
+
+        public static Color RandomColor()
+        {
+
+            Random r = new Random(DateTime.Now.Millisecond);
+            byte red = (byte)r.Next(0, 255);
+            byte green = (byte)r.Next(0, 255);
+            byte blue = (byte)r.Next(0, 255);
+
+            Color _opacity = Color.FromArgb(80, red, green, blue);
+            Color _solid = Color.FromArgb(100, red, green, blue);
+
+
+            return Color.FromArgb(80, red, green, blue);
+        }
+    }
+
+
+}

@@ -5,6 +5,7 @@ using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using Earthworm.Properties;
+using System.Drawing;
 
 namespace Earthworm.Components
 {
@@ -77,12 +78,14 @@ namespace Earthworm.Components
             if (!DA.GetDataList(1, paths)) return;
 
             List<string> outPaths = new List<string>();
-            DA.GetDataList(4, outPaths);
+            if (!DA.GetDataList(4, outPaths)) return;
 
             if (paths.Count != outPaths.Count)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Filepath counts do not match, please check your inputs");
             }
+
+            
 
 
             // Setup default inputs
@@ -149,8 +152,10 @@ namespace Earthworm.Components
                 PointLatLng maxExtent = new PointLatLng(maxLat, maxLng);
                 List<PointLatLng> uiCrop = new List<PointLatLng>();
 
+                // Apply random colour
+                Color color = RandomColorGenerator.RandomColor();
                 // Create crop properties + increment
-                CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp, outPath);
+                CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp, outPath, color);
 
 
                 // Limit properties added to persistent data
@@ -161,8 +166,12 @@ namespace Earthworm.Components
 
                 else if (properties.Count == paths.Count)
                 {
+                    properties[i].shp = shp;
                     properties[i].uiCrop = crop.uiCrop;
                     properties[i].path = crop.path;
+                    properties[i].color = crop.color;
+                    properties[i].minExtent = crop.minExtent;
+                    properties[i].maxExtent = crop.maxExtent;
                 }
 
 
