@@ -37,11 +37,11 @@ namespace Earthworm.Components
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("Min Pt", "Pt1", "South West extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("Min LatLng pt", "LatLng1", "South West extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
             Params.Input[
-            pManager.AddNumberParameter("Max Pt", "Pt2", "North East extents as lat long coordinate", GH_ParamAccess.list)
+            pManager.AddNumberParameter("Max LatLng pt", "LagLng2", "North East extents as lat long coordinate", GH_ParamAccess.list)
             ].Optional = true;
 
             Params.Input[
@@ -167,11 +167,18 @@ namespace Earthworm.Components
                 else if (properties.Count == paths.Count)
                 {
                     properties[i].shp = shp;
-                    properties[i].uiCrop = crop.uiCrop;
                     properties[i].path = crop.path;
                     properties[i].color = crop.color;
                     properties[i].minExtent = crop.minExtent;
                     properties[i].maxExtent = crop.maxExtent;
+
+                    // If there is GH input: replace crop
+                    if (Pt2[0] != 0 && Pt1[0] != 0)
+                    {
+                        properties[i].minCrop = crop.minCrop;
+                        properties[i].maxCrop = crop.maxCrop;
+                    }
+
                 }
 
 
