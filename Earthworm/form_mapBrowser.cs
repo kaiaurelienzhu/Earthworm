@@ -78,17 +78,11 @@ namespace Earthworm
                 gmap.Overlays.Add(extentOverlay);
 
 
-            
-
-                // Add shapefile names to listbox and check
-                checkedListBox1.Items.Add(property.shp.Name);
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                {
-                    checkedListBox1.SetItemChecked(i, true);
-
-                }
-
-
+                // Add colour and shapefile names to list view
+                ListViewItem item = new ListViewItem(property.shp.Name);
+                item.BackColor = Color.FromArgb(50, col.R, col.G, col.B);
+                item.Checked = true;
+                listView1.Items.Add(item);
 
             }
 
@@ -218,85 +212,79 @@ namespace Earthworm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Iterate through each shapefile
+            // Iterate through each properties of shapefiles
             foreach (CropProperties property in _properties)
             {
-                if (checkedListBox1.CheckedItems.Contains(property.shp.Name))
+                // Test if checked or not
+                foreach (ListViewItem item in listView1.CheckedItems)
                 {
-                    // Get original shapefile and reproject to WGS84
-                    Shapefile file = property.shp;
-                    ProjectionInfo originalPrj = file.Projection;
-                    ProjectionInfo WGS84 = ProjectionInfo.FromProj4String(KnownCoordinateSystems.Geographic.World.WGS1984.ToProj4String());
-                    file.Reproject(WGS84);
-
-                    // Create new shapefile & set projection
-                    FeatureSet result = new FeatureSet(FeatureType.Polygon);
-                    result.Projection = file.Projection;
-
-                    // Set new extent
-                    Extent extent = new Extent();
-                    extent.SetValues(property.minCrop.Lng, property.minCrop.Lat, property.maxCrop.Lng, property.maxCrop.Lat);
-
-                    // Copy feature data
-                    result.CopyTableSchema(file);
-
-                    foreach (Feature f in file.Features)
+                    if (item.Text.Contains(property.shp.Name))
                     {
-                        // Test to see if coord is within extent
-                        Shape shp = f.ToShape();
-                        IGeometry geom = shp.ToGeometry();
-                        IList<Coordinate> coords = geom.Coordinates;
-                        int hit = 0;
-                        foreach (Coordinate coord in coords)
+                        // Get original shapefile and reproject to WGS84
+                        Shapefile file = property.shp;
+                        ProjectionInfo originalPrj = file.Projection;
+                        ProjectionInfo WGS84 = ProjectionInfo.FromProj4String(KnownCoordinateSystems.Geographic.World.WGS1984.ToProj4String());
+                        file.Reproject(WGS84);
+
+                        // Create new shapefile & set projection
+                        FeatureSet result = new FeatureSet(FeatureType.Polygon);
+                        result.Projection = file.Projection;
+
+                        // Set new extent
+                        Extent extent = new Extent();
+                        extent.SetValues(property.minCrop.Lng, property.minCrop.Lat, property.maxCrop.Lng, property.maxCrop.Lat);
+
+                        // Copy feature data
+                        result.CopyTableSchema(file);
+
+                        foreach (Feature f in file.Features)
                         {
-                            if (extent.Contains(coord))
+                            // Test to see if coord is within extent
+                            Shape shp = f.ToShape();
+                            IGeometry geom = shp.ToGeometry();
+                            IList<Coordinate> coords = geom.Coordinates;
+                            int hit = 0;
+                            foreach (Coordinate coord in coords)
                             {
-                                hit++;
+                                if (extent.Contains(coord))
+                                {
+                                    hit++;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+                            if (hit != 0)
+                            {
+                                // Iterate through coords in list
+                                Polygon poly = new Polygon(coords);
+                                result.AddFeature(poly).CopyAttributes(f);
                             }
                             else
                             {
                                 continue;
                             }
+
                         }
-                        if (hit != 0)
+                        // Project pts back to original and save
+                        result.Reproject(originalPrj);
+                        if (property.path.Contains(".shp"))
                         {
-                            // Iterate through coords in list
-                            Polygon poly = new Polygon(coords);
-                            result.AddFeature(poly).CopyAttributes(f);
+                            result.SaveAs(property.path, true);
                         }
+
                         else
                         {
-                            continue;
+                            result.SaveAs(property.path + ".shp", true);
                         }
 
                     }
-                    // Project pts back to original and save
-                    result.Reproject(originalPrj);
-                    if (property.path.Contains(".shp"))
-                    {
-                        result.SaveAs(property.path, true);
-                    }
-
-                    else
-                    {
-                        result.SaveAs(property.path + ".shp", true);
-                    }
-
                 }
+                
             }
             this.Close();
         }
 
-
-
-        private void form_mapBrowser_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

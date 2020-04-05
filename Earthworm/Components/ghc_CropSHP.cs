@@ -85,9 +85,6 @@ namespace Earthworm.Components
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Filepath counts do not match, please check your inputs");
             }
 
-            
-
-
             // Setup default inputs
             List<double> Pt1 = new List<double>();
             DA.GetDataList(2, Pt1);
@@ -161,6 +158,12 @@ namespace Earthworm.Components
                 // Limit properties added to persistent data
                 if (properties.Count < paths.Count)
                 {
+                    properties.Add(crop);
+                }
+
+                else if (properties.Count > paths.Count)
+                {
+                    properties.Clear();
                     properties.Add(crop);
                 }
 

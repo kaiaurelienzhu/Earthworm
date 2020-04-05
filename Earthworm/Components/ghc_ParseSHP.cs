@@ -70,7 +70,7 @@ namespace Earthworm.Components
         {
             // Setup inputs
             string path = "";
-            if (!DA.GetData("Path", ref path)) return;
+            if (!DA.GetData("File Path", ref path)) return;
             Vector3d vec = new Vector3d(0, 0, 0);
             DA.GetData("Vector", ref vec);
 
