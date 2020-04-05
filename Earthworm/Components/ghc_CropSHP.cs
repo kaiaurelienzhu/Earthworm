@@ -55,8 +55,8 @@ namespace Earthworm.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddPointParameter("North East point", "MaxPt", "Max point in WGS84 coordinates", GH_ParamAccess.item);
-            pManager.AddPointParameter("South West point", "MinPt", "Min point in WGS84 coordinates", GH_ParamAccess.item); ;
+            pManager.AddPointParameter("North East point", "Pt1", "Max point in WGS84 coordinates", GH_ParamAccess.item);
+            pManager.AddPointParameter("South West point", "Pt2", "Min point in WGS84 coordinates", GH_ParamAccess.item); ;
         }
 
 

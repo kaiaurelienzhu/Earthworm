@@ -167,7 +167,7 @@ namespace Earthworm
         public static Color RandomColor()
         {
 
-            Random r = new Random(2);
+            Random r = new Random();
             byte red = (byte)r.Next(0, 255);
             byte green = (byte)r.Next(0, 255);
             byte blue = (byte)r.Next(0, 255);
