@@ -57,12 +57,7 @@ namespace Earthworm
                 gmap.Zoom = 10;
                 gmap.ShowCenter = false;
 
-                // Add shapefile names to listbox and check
-                checkedListBox1.Items.Add(property.shp.Name);
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                {
-                    checkedListBox1.SetItemChecked(i, true);
-                }
+
 
                 // Initialize shapefile boundaries
                 List<PointLatLng> points = new List<PointLatLng>();
@@ -81,6 +76,19 @@ namespace Earthworm
                 polygon.Stroke = new Pen(Color.FromArgb(col.R, col.G, col.B), 2);
                 extentOverlay.Polygons.Add(polygon);
                 gmap.Overlays.Add(extentOverlay);
+
+
+            
+
+                // Add shapefile names to listbox and check
+                checkedListBox1.Items.Add(property.shp.Name);
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, true);
+
+                }
+
+
 
             }
 
@@ -225,14 +233,11 @@ namespace Earthworm
                     FeatureSet result = new FeatureSet(FeatureType.Polygon);
                     result.Projection = file.Projection;
 
-
-
-
                     // Set new extent
                     Extent extent = new Extent();
                     extent.SetValues(property.minCrop.Lng, property.minCrop.Lat, property.maxCrop.Lng, property.maxCrop.Lat);
 
-
+                    // Copy feature data
                     result.CopyTableSchema(file);
 
                     foreach (Feature f in file.Features)
@@ -277,11 +282,8 @@ namespace Earthworm
                         result.SaveAs(property.path + ".shp", true);
                     }
 
-
-                    
                 }
             }
-
             this.Close();
         }
 
@@ -292,5 +294,9 @@ namespace Earthworm
 
         }
 
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
