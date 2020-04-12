@@ -175,8 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GdalConfiguration.vb" />
-    <None Include="Resources\LatLong_24x24.png" />
-    <None Include="Resources\Earthworm.png" />
+    <None Include="Resources\Earthworm_ParseSHP.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

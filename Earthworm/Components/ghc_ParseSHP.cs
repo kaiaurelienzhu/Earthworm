@@ -7,6 +7,7 @@ using DotSpatial.Serialization;
 using Grasshopper;
 using Grasshopper.Kernel.Data;
 using System.Data;
+using Earthworm.Properties;
 
 
 // In order to load the result of this wizard, you will also need to
@@ -146,7 +147,7 @@ namespace Earthworm.Components
             {
                 // You can add image files to your project resources and access them like this:
                 //return Resources.IconForThisComponent;
-                return null;
+                return Resources.Earthworm_ParseSHP;
             }
         }
 
