@@ -175,10 +175,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GdalConfiguration.vb" />
+    <None Include="Resources\Earthworm_lATlONG.png" />
     <None Include="Resources\Earthworm_XYZ.png" />
     <None Include="Resources\Earthworm_ParseSHP.png" />
     <None Include="Resources\Earthworm_ParsePRJ.png" />
-    <None Include="Resources\Earthworm_LatLong.png" />
     <None Include="Resources\Earthworm_LatLong.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
