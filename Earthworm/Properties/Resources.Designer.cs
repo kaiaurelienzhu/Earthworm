@@ -63,9 +63,39 @@ namespace Earthworm.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Earthworm_LatLong {
+            get {
+                object obj = ResourceManager.GetObject("Earthworm_LatLong", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Earthworm_ParsePRJ {
+            get {
+                object obj = ResourceManager.GetObject("Earthworm_ParsePRJ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Earthworm_ParseSHP {
             get {
                 object obj = ResourceManager.GetObject("Earthworm_ParseSHP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Earthworm_XYZ {
+            get {
+                object obj = ResourceManager.GetObject("Earthworm_XYZ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

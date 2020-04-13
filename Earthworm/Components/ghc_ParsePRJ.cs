@@ -5,6 +5,7 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using DotSpatial.Data;
 using DotSpatial.Projections;
+using Earthworm.Properties;
 
 namespace Earthworm.Components
 {
@@ -65,7 +66,7 @@ namespace Earthworm.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.Earthworm_ParsePRJ;
             }
         }
 

@@ -98,7 +98,8 @@ namespace Earthworm.Components
                     vals.Add(item.ToString());
                 }
                 valsTree.AddRange(vals, p);
-
+                
+              
 
                 // Get keys for each feature
                 DataTable table = dataRow.Table;
