@@ -175,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GdalConfiguration.vb" />
+    <None Include="Resources\Earthworm_Reproject.png" />
+    <None Include="Resources\Earthworm_Logo.png" />
     <None Include="Resources\Earthworm_lATlONG.png" />
     <None Include="Resources\Earthworm_XYZ.png" />
     <None Include="Resources\Earthworm_ParseSHP.png" />

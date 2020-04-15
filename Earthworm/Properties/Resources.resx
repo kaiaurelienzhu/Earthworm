@@ -121,11 +121,17 @@
   <data name="Earthworm_LatLong" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Earthworm_lATlONG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Earthworm_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Earthworm_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Earthworm_ParsePRJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Earthworm_ParsePRJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Earthworm_ParseSHP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Earthworm_ParseSHP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Earthworm_Reproject" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Earthworm_Reproject.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Earthworm_XYZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Earthworm_XYZ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
