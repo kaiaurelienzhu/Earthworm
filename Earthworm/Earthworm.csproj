@@ -137,7 +137,6 @@
   <ItemGroup>
     <Compile Include="Components\ghc_CropSHP.cs" />
     <Compile Include="Components\ghc_LatLong.cs" />
-    <Compile Include="Components\ghc_ParseGeoJSON.cs" />
     <Compile Include="Components\ghc_ParsePRJ.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
     <Compile Include="Components\ghc_Reproject.cs" />
