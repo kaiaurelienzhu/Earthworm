@@ -89,43 +89,10 @@ namespace Earthworm.Components
             int pathCount = 0;
             foreach (Feature f in shp.Features)
             {
-                // Get values for each feature
-                GH_Path p = new GH_Path(pathCount);
-                DataRow dataRow = f.DataRow;
-                List<string> vals = new List<string>();
-                foreach (object item in dataRow.ItemArray)
-                {
-                    vals.Add(item.ToString());
-                }
-                valsTree.AddRange(vals, p);
-                
-              
 
-                // Get keys for each feature
-                DataTable table = dataRow.Table;
-                DataColumnCollection columns = table.Columns;
-                DataColumn[] dca = new DataColumn[columns.Count];
-                columns.CopyTo(dca, 0);
-                List<string> keys = new List<string>();
-                foreach (DataColumn col in dca)
-                {
-
-                    keys.Add(col.ColumnName.ToString());
-                }
-                keysTree.AddRange(keys, p);
-
-
-                // Get pts for each feature and transform by user input vector
-                List<Point3d> pts = new List<Point3d>();
-
-                IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
-                foreach (DotSpatial.Topology.Coordinate coord in coords)
-                {
-                    Point3d pt = new Point3d(coord.X + vec.X, coord.Y + vec.Y, 0 + vec.Z);
-                    pts.Add(pt);
-                }     
-                ptTree.AddRange(pts, p);
-
+                valsTree = GetFeatureValues(f, pathCount, valsTree);
+                keysTree = GetFeatureKeys(f, pathCount, keysTree);
+                ptTree = GetFeaturePts(f, pathCount, ptTree, vec);
                 // Increment path
                 pathCount++;
             }
@@ -136,6 +103,49 @@ namespace Earthworm.Components
             DA.SetDataTree(2, ptTree);
             DA.SetData(3, prjStr);
             DA.SetData(4, prj);
+        }
+
+        private DataTree<Point3d> GetFeaturePts(Feature f, int pathCount, DataTree<Point3d> ptTree, Vector3d vec)
+        {
+            List<Point3d> pts = new List<Point3d>();
+            GH_Path p = new GH_Path(pathCount);
+            IList<DotSpatial.Topology.Coordinate> coords = f.Coordinates;
+            foreach (DotSpatial.Topology.Coordinate coord in coords)
+            {
+                Point3d pt = new Point3d(coord.X + vec.X, coord.Y + vec.Y, 0 + vec.Z);
+                pts.Add(pt);
+            }
+            ptTree.AddRange(pts, p);
+            return ptTree;
+        }
+        private DataTree<string> GetFeatureKeys(Feature f, int pathCount, DataTree<string> keysTree)
+        {
+            DataRow dataRow = f.DataRow;
+            GH_Path p = new GH_Path(pathCount);
+            DataTable table = dataRow.Table;
+            DataColumnCollection columns = table.Columns;
+            DataColumn[] dca = new DataColumn[columns.Count];
+            columns.CopyTo(dca, 0);
+            List<string> keys = new List<string>();
+            foreach (DataColumn col in dca)
+            {
+
+                keys.Add(col.ColumnName.ToString());
+            }
+            keysTree.AddRange(keys, p);
+            return keysTree;
+        }
+        private DataTree<string> GetFeatureValues(Feature f, int pathCount, DataTree<string> valsTree)
+        {
+            DataRow dataRow = f.DataRow;
+            GH_Path p = new GH_Path(pathCount);
+            List<string> vals = new List<string>();
+            foreach (object item in dataRow.ItemArray)
+            {
+                vals.Add(item.ToString());
+            }
+            valsTree.AddRange(vals, p);
+            return valsTree;
         }
 
         /// <summary>
