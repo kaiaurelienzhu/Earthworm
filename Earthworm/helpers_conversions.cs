@@ -1,15 +1,7 @@
 ﻿using DotSpatial.Projections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Rhino.Geometry;
-using DotSpatial.Data;
-using OSGeo.GDAL;
 using OSGeo.OGR;
-using OSGeo.OSR;
-using DotSpatial.Topology;
 
 namespace Earthworm
 {

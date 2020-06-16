@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Earthworm.Properties;
 using Grasshopper.Kernel;
 using Rhino.Geometry;

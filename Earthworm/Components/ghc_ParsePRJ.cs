@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Grasshopper.Kernel;
-using Rhino.Geometry;
-using DotSpatial.Data;
 using DotSpatial.Projections;
 using Earthworm.Properties;
 

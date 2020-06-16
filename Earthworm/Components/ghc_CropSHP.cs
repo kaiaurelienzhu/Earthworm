@@ -30,7 +30,7 @@ namespace Earthworm.Components
 
             // Compulsory inputs
             pManager.AddBooleanParameter("Run", "Run", "Change to True to run", GH_ParamAccess.item);
-            
+
             // Options inputs
             Params.Input[
             pManager.AddTextParameter("Path", "inPaths", "File path of shapefile as string.", GH_ParamAccess.list)
@@ -113,16 +113,13 @@ namespace Earthworm.Components
                 // Open shapefile + data
                 Shapefile shp = Shapefile.OpenFile(path);
                 string prjStr = shp.ProjectionString;
- 
+
                 // Find extents & centre of shapefile
                 double minLng = shp.Extent.MinX;
                 double minLat = shp.Extent.MinY;
 
                 double maxLng = shp.Extent.MaxX;
                 double maxLat = shp.Extent.MaxY;
-
-                double centreLng = shp.Extent.Center.X;
-                double centreLat = shp.Extent.Center.Y;
 
                 // Reorder pts to ensure max and min are valid inputs
                 List<double> Lats = new List<double>();
@@ -152,7 +149,16 @@ namespace Earthworm.Components
                 // Apply random colour
                 Color color = RandomColorGenerator.RandomColor();
                 // Create crop properties + increment
-                CropProperties crop = new CropProperties(minExtent, maxExtent, minLatLng, maxLatLng, uiCrop, shp, outPath, color);
+                CropProperties crop = new CropProperties()
+                {
+                    Color = color,
+                    MinExtent = minExtent,
+                    MaxExtent = maxExtent,
+                    MinCrop = minLatLng,
+                    MaxCrop = maxLatLng,
+                    UICrop = uiCrop,
+                    shp = shp
+                };
 
 
                 // Limit properties added to persistent data
@@ -170,31 +176,27 @@ namespace Earthworm.Components
                 else if (properties.Count == paths.Count)
                 {
                     properties[i].shp = shp;
-                    properties[i].path = crop.path;
-                    properties[i].color = crop.color;
-                    properties[i].minExtent = crop.minExtent;
-                    properties[i].maxExtent = crop.maxExtent;
+                    properties[i].Path = crop.Path;
+                    properties[i].Color = crop.Color;
+                    properties[i].MinExtent = crop.MinExtent;
+                    properties[i].MaxExtent = crop.MaxExtent;
 
                     // If there is GH input: replace crop
                     if (Pt2[0] != 0 && Pt1[0] != 0)
                     {
-                        properties[i].minCrop = crop.minCrop;
-                        properties[i].maxCrop = crop.maxCrop;
+                        properties[i].MinCrop = crop.MinCrop;
+                        properties[i].MaxCrop = crop.MaxCrop;
                     }
 
                 }
-
-
-                
-
             }
 
             // Define extents
             CropProperties mainCrop = properties[0];
             if (extents.Count != 2)
             {
-                Point3d min = new Point3d(mainCrop.minCrop.Lng, mainCrop.minCrop.Lat, 0);
-                Point3d max = new Point3d(mainCrop.maxCrop.Lng, mainCrop.maxCrop.Lat, 0);
+                Point3d min = new Point3d(mainCrop.MinCrop.Lng, mainCrop.MinCrop.Lat, 0);
+                Point3d max = new Point3d(mainCrop.MaxCrop.Lng, mainCrop.MaxCrop.Lat, 0);
                 extents.Add(min);
                 extents.Add(max);
             }
@@ -209,8 +211,8 @@ namespace Earthworm.Components
 
 
             // Set output 
-            Point3d newmin = new Point3d(mainCrop.minCrop.Lng, mainCrop.minCrop.Lat, 0);
-            Point3d newmax = new Point3d(mainCrop.maxCrop.Lng, mainCrop.maxCrop.Lat, 0);
+            Point3d newmin = new Point3d(mainCrop.MinCrop.Lng, mainCrop.MinCrop.Lat, 0);
+            Point3d newmax = new Point3d(mainCrop.MaxCrop.Lng, mainCrop.MaxCrop.Lat, 0);
             extents.Clear();
             extents.Add(newmin);
             extents.Add(newmax);

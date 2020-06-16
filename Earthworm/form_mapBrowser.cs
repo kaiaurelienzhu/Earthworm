@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DotSpatial.Data;
 using DotSpatial.Projections;
@@ -14,8 +8,6 @@ using DotSpatial.Topology;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
-using GMap.NET.WindowsForms.Markers;
-using GMap.NET.WindowsForms.ToolTips;
 
 
 namespace Earthworm
@@ -30,7 +22,6 @@ namespace Earthworm
         {
             _properties = properties;
             InitializeComponent();
-
         }
 
         // Setup overlays
@@ -44,14 +35,12 @@ namespace Earthworm
             gmap.MapProvider = GMapProviders.GoogleHybridMap;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
 
-            // Setup base single ui crop
-            List<PointLatLng> uiCropPts = _properties[0].uiCrop;
 
             // Iterate over each shapefile
             foreach (CropProperties property in _properties)
             {
 
-                gmap.Position = property.maxExtent;
+                gmap.Position = property.MaxExtent;
                 gmap.MinZoom = 1;
                 gmap.MaxZoom = 24;
                 gmap.Zoom = 10;
@@ -63,27 +52,32 @@ namespace Earthworm
                 List<PointLatLng> points = new List<PointLatLng>();
 
                 // Create polygons + add to map Lat = Y, Lng = X
-                points.Add(property.minExtent);
-                points.Add(new PointLatLng(property.maxExtent.Lat, property.minExtent.Lng));
-                points.Add(property.maxExtent);
-                points.Add(new PointLatLng(property.minExtent.Lat, property.maxExtent.Lng));
+                points.Add(property.MinExtent);
+                points.Add(new PointLatLng(property.MaxExtent.Lat, property.MinExtent.Lng));
+                points.Add(property.MaxExtent);
+                points.Add(new PointLatLng(property.MinExtent.Lat, property.MaxExtent.Lng));
 
                 // Creates extents and style
+                Color col = property.Color;
                 GMapOverlay extentOverlay = new GMapOverlay("Extent overlay");
-                GMapPolygon polygon = new GMapPolygon(points, "Extents");
-                Color col = property.color;
-                polygon.Fill = new SolidBrush(Color.FromArgb(80, col.R, col.G, col.B));
-                polygon.Stroke = new Pen(Color.FromArgb(col.R, col.G, col.B), 2);
+
+                GMapPolygon polygon = new GMapPolygon(points, "Extents")
+                {
+                   Fill = new SolidBrush(Color.FromArgb(80, col.R, col.G, col.B)),
+                   Stroke = new Pen(Color.FromArgb(col.R, col.G, col.B), 2)
+                };
+
                 extentOverlay.Polygons.Add(polygon);
                 gmap.Overlays.Add(extentOverlay);
 
 
                 // Add colour and shapefile names to list view
-                ListViewItem item = new ListViewItem(property.shp.Name);
-                item.BackColor = Color.FromArgb(50, col.R, col.G, col.B);
-                item.Checked = true;
+                ListViewItem item = new ListViewItem(property.shp.Name)
+                {
+                    BackColor = Color.FromArgb(50, col.R, col.G, col.B),
+                    Checked = true
+                };
                 listView1.Items.Add(item);
-
             }
 
 
@@ -96,10 +90,10 @@ namespace Earthworm
                 List<PointLatLng> cropPts = new List<PointLatLng>();
 
 
-                cropPts.Add(firstCrop.minCrop);
-                cropPts.Add(new PointLatLng(firstCrop.maxCrop.Lat, firstCrop.minCrop.Lng));
-                cropPts.Add(firstCrop.maxCrop);
-                cropPts.Add(new PointLatLng(firstCrop.minCrop.Lat, firstCrop.maxCrop.Lng));
+                cropPts.Add(firstCrop.MinCrop);
+                cropPts.Add(new PointLatLng(firstCrop.MaxCrop.Lat, firstCrop.MinCrop.Lng));
+                cropPts.Add(firstCrop.MaxCrop);
+                cropPts.Add(new PointLatLng(firstCrop.MinCrop.Lat, firstCrop.MaxCrop.Lng));
 
 
 
@@ -123,8 +117,8 @@ namespace Earthworm
             // Reset crop in all shapefiles
             foreach (CropProperties props in _properties)
             {
-                props.maxCrop = new PointLatLng(0, 0);
-                props.minCrop = new PointLatLng(0, 0);
+                props.MaxCrop = new PointLatLng(0, 0);
+                props.MinCrop = new PointLatLng(0, 0);
             }
             uiOverlay.Clear();
             cropOverlay.Clear();
@@ -134,7 +128,7 @@ namespace Earthworm
         {
             // Setup map overlay
             CropProperties crop = _properties[0];
-            List<PointLatLng> pts = crop.uiCrop;
+            List<PointLatLng> pts = crop.UICrop;
 
 
             // Register left mouse button
@@ -152,7 +146,7 @@ namespace Earthworm
                 }
 
                 // Add a bounding box to map
-                if (crop.uiCrop.Count == 2)
+                if (crop.UICrop.Count == 2)
                 {
                     
                     // Reorder pts to ensure max and min are correct.
@@ -202,8 +196,8 @@ namespace Earthworm
                     foreach (CropProperties cropBoundary in _properties)
                     {
                         
-                        cropBoundary.minCrop = pt0;
-                        cropBoundary.maxCrop = pt2;
+                        cropBoundary.MinCrop = pt0;
+                        cropBoundary.MaxCrop = pt2;
                     }
 
                 }
@@ -232,7 +226,7 @@ namespace Earthworm
 
                         // Set new extent
                         Extent extent = new Extent();
-                        extent.SetValues(property.minCrop.Lng, property.minCrop.Lat, property.maxCrop.Lng, property.maxCrop.Lat);
+                        extent.SetValues(property.MinCrop.Lng, property.MinCrop.Lat, property.MaxCrop.Lng, property.MaxCrop.Lat);
 
                         // Copy feature data
                         result.CopyTableSchema(file);
@@ -269,14 +263,14 @@ namespace Earthworm
                         }
                         // Project pts back to original and save
                         result.Reproject(originalPrj);
-                        if (property.path.Contains(".shp"))
+                        if (property.Path.Contains(".shp"))
                         {
-                            result.SaveAs(property.path, true);
+                            result.SaveAs(property.Path, true);
                         }
 
                         else
                         {
-                            result.SaveAs(property.path + ".shp", true);
+                            result.SaveAs(property.Path + ".shp", true);
                         }
 
                     }

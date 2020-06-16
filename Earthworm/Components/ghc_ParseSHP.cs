@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using DotSpatial.Data;
-using DotSpatial.Serialization;
 using Grasshopper;
 using Grasshopper.Kernel.Data;
 using System.Data;
