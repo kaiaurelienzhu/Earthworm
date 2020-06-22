@@ -19,6 +19,16 @@ namespace Earthworm
             
         }
 
+        public static List<PointLatLng> DrawExtents(PointLatLng min, PointLatLng max)
+        {
+            var points = new List<PointLatLng>();
+            points.Add(min);
+            points.Add(new PointLatLng(max.Lat, min.Lng));
+            points.Add(max);
+            points.Add(new PointLatLng(min.Lat, max.Lng));
+            return points;
+        }
+
     }
 
     // Create properties which must be met for each shapefile

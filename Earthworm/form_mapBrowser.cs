@@ -39,7 +39,7 @@ namespace Earthworm
             // Iterate over each shapefile
             foreach (CropProperties property in _properties)
             {
-
+                // Default values
                 gmap.Position = property.MaxExtent;
                 gmap.MinZoom = 1;
                 gmap.MaxZoom = 24;
@@ -47,15 +47,7 @@ namespace Earthworm
                 gmap.ShowCenter = false;
 
 
-
-                // Initialize shapefile boundaries
-                List<PointLatLng> points = new List<PointLatLng>();
-
-                // Create polygons + add to map Lat = Y, Lng = X
-                points.Add(property.MinExtent);
-                points.Add(new PointLatLng(property.MaxExtent.Lat, property.MinExtent.Lng));
-                points.Add(property.MaxExtent);
-                points.Add(new PointLatLng(property.MinExtent.Lat, property.MaxExtent.Lng));
+                var points = helpers_UI.DrawExtents(property.MinExtent, property.MaxExtent);
 
                 // Creates extents and style
                 Color col = property.Color;
@@ -87,24 +79,14 @@ namespace Earthworm
             // Parametric input
             if (firstCrop != null)
             {
-                List<PointLatLng> cropPts = new List<PointLatLng>();
-
-
-                cropPts.Add(firstCrop.MinCrop);
-                cropPts.Add(new PointLatLng(firstCrop.MaxCrop.Lat, firstCrop.MinCrop.Lng));
-                cropPts.Add(firstCrop.MaxCrop);
-                cropPts.Add(new PointLatLng(firstCrop.MinCrop.Lat, firstCrop.MaxCrop.Lng));
-
-
+                var cropPts = helpers_UI.DrawExtents(firstCrop.MinCrop, firstCrop.MaxCrop);
 
                 // ADD POLYGON TO MAP
-                var rand = new Random();
                 GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
                 crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
                 crop.Stroke = new Pen(Color.Red, 2);
                 cropOverlay.Polygons.Add(crop);
                 gmap.Overlays.Add(cropOverlay);
-
             }
 
 
