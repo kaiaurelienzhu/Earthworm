@@ -56,7 +56,8 @@ namespace Earthworm.Components
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddPointParameter("North East point", "Pt1", "Max point in WGS84 coordinates", GH_ParamAccess.item);
-            pManager.AddPointParameter("South West point", "Pt2", "Min point in WGS84 coordinates", GH_ParamAccess.item); ;
+            pManager.AddPointParameter("South West point", "Pt2", "Min point in WGS84 coordinates", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Main crop", "C", "Main crop properties class", GH_ParamAccess.item);
         }
 
 
@@ -157,7 +158,8 @@ namespace Earthworm.Components
                     MinCrop = minLatLng,
                     MaxCrop = maxLatLng,
                     UICrop = uiCrop,
-                    shp = shp
+                    shp = shp,
+                    Path = outPath
                 };
 
 
@@ -218,6 +220,7 @@ namespace Earthworm.Components
             extents.Add(newmax);
             DA.SetData(0, extents[0]);
             DA.SetData(1, extents[1]);
+            DA.SetData(2, mainCrop);
         }
 
 

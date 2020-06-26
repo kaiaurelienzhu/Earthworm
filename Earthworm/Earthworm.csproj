@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\ghc_CropSHP.cs" />
+    <Compile Include="Components\ghc_CustomClass.cs" />
     <Compile Include="Components\ghc_LatLong.cs" />
     <Compile Include="Components\ghc_ParsePRJ.cs" />
     <Compile Include="Components\ghc_ParseSHP.cs" />
