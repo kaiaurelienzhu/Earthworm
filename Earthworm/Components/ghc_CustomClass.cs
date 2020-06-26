@@ -24,6 +24,7 @@ namespace Earthworm.Components
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("crop properties", "crop", "custom type", GH_ParamAccess.item);
+
         }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace Earthworm.Components
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("data", "D", "Data from custom type", GH_ParamAccess.item);
+            pManager.AddGenericParameter("data2", "D2", "Data2 from custom type", GH_ParamAccess.item); 
         }
 
         /// <summary>
@@ -43,7 +45,8 @@ namespace Earthworm.Components
             CropProperties cropProperties = null;
             if (!DA.GetData("crop properties", ref cropProperties)) return;
 
-
+            DA.SetData(0, cropProperties.Path);
+            DA.SetData(1, cropProperties.shp.Name);
 
         }
 
