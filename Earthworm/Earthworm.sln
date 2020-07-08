@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Earthworm", "Earthworm.csproj", "{2CB70879-CBB8-411B-B80E-EA4FC39A625D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Earthworm-unitTests", "..\Earthworm-unitTests\Earthworm-unitTests.csproj", "{86D8EF5D-8A0D-4463-881C-4DCD3230E843}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2CB70879-CBB8-411B-B80E-EA4FC39A625D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CB70879-CBB8-411B-B80E-EA4FC39A625D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CB70879-CBB8-411B-B80E-EA4FC39A625D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86D8EF5D-8A0D-4463-881C-4DCD3230E843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D8EF5D-8A0D-4463-881C-4DCD3230E843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D8EF5D-8A0D-4463-881C-4DCD3230E843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D8EF5D-8A0D-4463-881C-4DCD3230E843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

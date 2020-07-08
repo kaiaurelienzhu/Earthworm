@@ -47,7 +47,7 @@ namespace Earthworm
                 gmap.ShowCenter = false;
 
 
-                var points = helpers_UI.DrawExtents(property.MinExtent, property.MaxExtent);
+                var points = helpers_UI.CreateRectangle(property.MinExtent, property.MaxExtent);
 
                 // Creates extents and style
                 Color col = property.Color;
@@ -79,14 +79,9 @@ namespace Earthworm
             // Parametric input
             if (firstCrop != null)
             {
-                var cropPts = helpers_UI.DrawExtents(firstCrop.MinCrop, firstCrop.MaxCrop);
-
-                // ADD POLYGON TO MAP
-                GMapPolygon crop = new GMapPolygon(cropPts, "Crop");
-                crop.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
-                crop.Stroke = new Pen(Color.Red, 2);
-                cropOverlay.Polygons.Add(crop);
-                gmap.Overlays.Add(cropOverlay);
+                var rectangle = helpers_UI.CreateRectangle(firstCrop.MinCrop, firstCrop.MaxCrop);
+                var overlayRectangle = helpers_UI.DrawRectangle(rectangle, cropOverlay);
+                gmap.Overlays.Add(overlayRectangle);
             }
 
 

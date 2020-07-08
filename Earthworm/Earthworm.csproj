@@ -149,8 +149,8 @@
       <DependentUpon>form_mapBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="GdalConfiguration.cs" />
-    <Compile Include="helpers_Conversions.cs" />
-    <Compile Include="helpers_UI.cs" />
+    <Compile Include="Helpers\helpers_Conversions.cs" />
+    <Compile Include="Helpers\helpers_UI.cs" />
     <Compile Include="EarthwormInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
