@@ -29,23 +29,12 @@ namespace Earthworm
         GMapOverlay uiOverlay = new GMapOverlay("UI overlay");
         private void gMapControl1_Load(object sender, EventArgs e)
         {
-
-
-            // Initialize map
-            gmap.MapProvider = GMapProviders.GoogleHybridMap;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-
-
+            initializeMap();
             // Iterate over each shapefile
             foreach (CropProperties property in _properties)
             {
                 // Default values
-                gmap.Position = property.MaxExtent;
-                gmap.MinZoom = 1;
-                gmap.MaxZoom = 24;
-                gmap.Zoom = 10;
-                gmap.ShowCenter = false;
-
+                viewport.Position = property.MaxExtent;
 
                 var points = helpers_UI.CreateRectangle(property.MinExtent, property.MaxExtent);
 
@@ -60,16 +49,16 @@ namespace Earthworm
                 };
 
                 extentOverlay.Polygons.Add(polygon);
-                gmap.Overlays.Add(extentOverlay);
+                viewport.Overlays.Add(extentOverlay);
 
 
                 // Add colour and shapefile names to list view
-                ListViewItem item = new ListViewItem(property.shp.Name)
+                ListViewItem shapefileName = new ListViewItem(property.shp.Name)
                 {
                     BackColor = Color.FromArgb(50, col.R, col.G, col.B),
                     Checked = true
                 };
-                listView1.Items.Add(item);
+                shapefileChecklist.Items.Add(shapefileName);
             }
 
 
@@ -81,13 +70,19 @@ namespace Earthworm
             {
                 var rectangle = helpers_UI.CreateRectangle(firstCrop.MinCrop, firstCrop.MaxCrop);
                 var overlayRectangle = helpers_UI.DrawRectangle(rectangle, cropOverlay);
-                gmap.Overlays.Add(overlayRectangle);
+                viewport.Overlays.Add(overlayRectangle);
             }
-
-
         }
 
-
+        private void initializeMap()
+        {
+            viewport.MapProvider = GMapProviders.GoogleHybridMap;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            viewport.MinZoom = 1;
+            viewport.MaxZoom = 24;
+            viewport.Zoom = 10;
+            viewport.ShowCenter = false;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -111,7 +106,7 @@ namespace Earthworm
             // Register left mouse button
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                PointLatLng pt = gmap.FromLocalToLatLng(e.X, e.Y);
+                PointLatLng pt = viewport.FromLocalToLatLng(e.X, e.Y);
                 pts.Add(pt);
 
                 if (pts.Count > 2)
@@ -162,11 +157,11 @@ namespace Earthworm
 
                     // Render the polygon
                     cropOverlay.Clear();
-                    gmap.Overlays.Remove(uiOverlay);
+                    viewport.Overlays.Remove(uiOverlay);
                     GMapPolygon cropB = new GMapPolygon(finalPts, "Crop");
                     cropB.Fill = new SolidBrush(Color.FromArgb(80, Color.Red));
                     cropB.Stroke = new Pen(Color.Red, 4);
-                    gmap.Overlays.Add(uiOverlay);
+                    viewport.Overlays.Add(uiOverlay);
                     uiOverlay.Polygons.Add(cropB);
 
                     // Set the crop boundary max and min
@@ -187,7 +182,7 @@ namespace Earthworm
             foreach (CropProperties property in _properties)
             {
                 // Test if checked or not
-                foreach (ListViewItem item in listView1.CheckedItems)
+                foreach (ListViewItem item in shapefileChecklist.CheckedItems)
                 {
                     if (item.Text.Contains(property.shp.Name))
                     {

@@ -28,46 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gmap = new GMap.NET.WindowsForms.GMapControl();
+            this.viewport = new GMap.NET.WindowsForms.GMapControl();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.shapefileChecklist = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
-            // gmap
+            // viewport
             // 
-            this.gmap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.viewport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gmap.AutoScroll = true;
-            this.gmap.AutoSize = true;
-            this.gmap.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gmap.Bearing = 0F;
-            this.gmap.CanDragMap = true;
-            this.gmap.EmptyTileColor = System.Drawing.Color.Navy;
-            this.gmap.GrayScaleMode = true;
-            this.gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            this.gmap.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.gmap.LevelsKeepInMemmory = 5;
-            this.gmap.Location = new System.Drawing.Point(12, 12);
-            this.gmap.MarkersEnabled = true;
-            this.gmap.MaxZoom = 2;
-            this.gmap.MinZoom = 2;
-            this.gmap.MouseWheelZoomEnabled = true;
-            this.gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-            this.gmap.Name = "gmap";
-            this.gmap.NegativeMode = false;
-            this.gmap.PolygonsEnabled = true;
-            this.gmap.RetryLoadTile = 0;
-            this.gmap.RoutesEnabled = true;
-            this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.gmap.ShowTileGridLines = false;
-            this.gmap.Size = new System.Drawing.Size(896, 654);
-            this.gmap.TabIndex = 0;
-            this.gmap.Zoom = 2D;
-            this.gmap.Load += new System.EventHandler(this.gMapControl1_Load);
-            this.gmap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gmap_MouseClick);
+            this.viewport.AutoScroll = true;
+            this.viewport.AutoSize = true;
+            this.viewport.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.viewport.Bearing = 0F;
+            this.viewport.CanDragMap = true;
+            this.viewport.EmptyTileColor = System.Drawing.Color.Navy;
+            this.viewport.GrayScaleMode = true;
+            this.viewport.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.viewport.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.viewport.LevelsKeepInMemmory = 5;
+            this.viewport.Location = new System.Drawing.Point(12, 12);
+            this.viewport.MarkersEnabled = true;
+            this.viewport.MaxZoom = 2;
+            this.viewport.MinZoom = 2;
+            this.viewport.MouseWheelZoomEnabled = true;
+            this.viewport.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.viewport.Name = "viewport";
+            this.viewport.NegativeMode = false;
+            this.viewport.PolygonsEnabled = true;
+            this.viewport.RetryLoadTile = 0;
+            this.viewport.RoutesEnabled = true;
+            this.viewport.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.viewport.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.viewport.ShowTileGridLines = false;
+            this.viewport.Size = new System.Drawing.Size(896, 654);
+            this.viewport.TabIndex = 0;
+            this.viewport.Zoom = 2D;
+            this.viewport.Load += new System.EventHandler(this.gMapControl1_Load);
+            this.viewport.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gmap_MouseClick);
             // 
             // button1
             // 
@@ -97,17 +97,17 @@
             // 
             // listView1
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.shapefileChecklist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.CheckBoxes = true;
-            this.listView1.HideSelection = false;
-            this.listView1.LabelWrap = false;
-            this.listView1.Location = new System.Drawing.Point(914, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(371, 457);
-            this.listView1.TabIndex = 4;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.shapefileChecklist.CheckBoxes = true;
+            this.shapefileChecklist.HideSelection = false;
+            this.shapefileChecklist.LabelWrap = false;
+            this.shapefileChecklist.Location = new System.Drawing.Point(914, 12);
+            this.shapefileChecklist.Name = "listView1";
+            this.shapefileChecklist.Size = new System.Drawing.Size(371, 457);
+            this.shapefileChecklist.TabIndex = 4;
+            this.shapefileChecklist.UseCompatibleStateImageBehavior = false;
+            this.shapefileChecklist.View = System.Windows.Forms.View.List;
             // 
             // form_mapBrowser
             // 
@@ -115,10 +115,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1297, 678);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.shapefileChecklist);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.gmap);
+            this.Controls.Add(this.viewport);
             this.DoubleBuffered = true;
             this.Name = "form_mapBrowser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -130,9 +130,9 @@
 
         #endregion
 
-        public GMap.NET.WindowsForms.GMapControl gmap;
+        public GMap.NET.WindowsForms.GMapControl viewport;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView shapefileChecklist;
     }
 }
